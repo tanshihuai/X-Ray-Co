@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('index/', views.index),
-    
+
     path('Homepage/', views.Homepage),
     path('PatientCreateAccountPage/', views.PatientCreateAccountPage),
     path('ForgetPassword/', views.ForgetPassword),
@@ -26,4 +26,3 @@ urlpatterns = [
     path('PatientViewDiagnosis/', views.PatientViewDiagnosis),
     path('PatientAccountPage/', views.PatientAccountPage),
 ]
-
