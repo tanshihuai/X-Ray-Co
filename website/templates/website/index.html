@@ -1,60 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
-<body>
-    <h1>
-        This is an index page that lists out all the different pages of the website. 
+{% extends 'website/base/base.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main_heading %}
+        This is an index page that lists out all the different pages of the website.
+{% endblock %}
+
+{% block header_content %}
         This page is hidden from all users.
-    </h1>
-    <p>
-        <a href="http://127.0.0.1:8000/Homepage/">  Homepage  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/PatientCreateAccountPage/">  PatientCreateAccountPage  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/ForgetPassword/">  ForgetPassword  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/ChangePassword/">  ChangePassword  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/AdminHomepage/">  AdminHomepage  </a>
-            <br>
+{% endblock %}
+
+{% block body %}
+
+    <a href="http://127.0.0.1:8000/Homepage/">  Homepage  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/PatientCreateAccountPage/">  PatientCreateAccountPage  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/ForgetPassword/">  ForgetPassword  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/ChangePassword/">  ChangePassword  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/AdminHomepage/">  AdminHomepage  </a>
+        <br>
 
 
 
-        <a href="http://127.0.0.1:8000/NurseHomepage/">  NurseHomepage  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/NurseViewPatientProfile/">  NurseViewPatientProfile  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/NurseCaseReport/">  NurseCaseReport  </a>
-            <br>
-        
+    <a href="http://127.0.0.1:8000/NurseHomepage/">  NurseHomepage  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/NurseViewPatientProfile/">  NurseViewPatientProfile  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/NurseCaseReport/">  NurseCaseReport  </a>
+        <br>
+    
 
 
-        <a href="http://127.0.0.1:8000/DoctorHomepage/">  DoctorHomepage  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/DoctorSeePatient/">  DoctorSeePatient  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/DoctorViewPatientQuestionnaire/">  DoctorViewPatientQuestionnaire  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/XRayStaffHomepage/">  XRayStaffHomepage  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/XRayStaffXrayPage/">  XRayStaffXrayPage  </a>
-            <br>
+    <a href="http://127.0.0.1:8000/DoctorHomepage/">  DoctorHomepage  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/DoctorSeePatient/">  DoctorSeePatient  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/DoctorViewPatientQuestionnaire/">  DoctorViewPatientQuestionnaire  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/XRayStaffHomepage/">  XRayStaffHomepage  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/XRayStaffXrayPage/">  XRayStaffXrayPage  </a>
+        <br>
 
-        
+    
 
-        <a href="http://127.0.0.1:8000/PatientHomePage/">  PatientHomePage  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/PatientViewVisit/">  PatientViewVisit  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/PatientViewDiagnosis/">  PatientViewDiagnosis  </a>
-            <br>
-        <a href="http://127.0.0.1:8000/PatientAccountPage/">  PatientAccountPage  </a>
-            <br>
-    </p>
-</body>
-</html>
+    <a href="http://127.0.0.1:8000/PatientHomePage/">  PatientHomePage  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/PatientViewVisit/">  PatientViewVisit  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/PatientViewDiagnosis/">  PatientViewDiagnosis  </a>
+        <br>
+    <a href="http://127.0.0.1:8000/PatientAccountPage/">  PatientAccountPage  </a>
+        <br>
+    
+{% endblock %}
