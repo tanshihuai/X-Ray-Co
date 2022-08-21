@@ -53,3 +53,12 @@ button:hover,
     color: #350490;
     font-weight: bold;
 }
+
+#logout {
+  position: relative;
+}
+#logout img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}

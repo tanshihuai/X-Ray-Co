@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Patient
 
 # Create your views here.
 
@@ -29,7 +30,9 @@ def AdminHomepage(request):
 
 
 def NurseHomepage(request):
-    return render(request, 'website/NurseHomepage.html')
+    all_patients = Patient.objects.all()
+    context = {'all_patients': all_patients}
+    return render(request, 'website/NurseHomepage.html', context)
 
 def NurseViewPatientProfile(request):
     return render(request, 'website/NurseViewPatientProfile.html')

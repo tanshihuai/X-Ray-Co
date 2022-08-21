@@ -1,14 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NurseHomepage</title>
-</head>
-<body>
-    <h1>
-        This is an NurseHomepage
-    </h1>
-</body>
-</html>
+{% extends 'website/base/base.html' %}
+
+{% block title %}
+    NurseHomepage
+{% endblock %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>NRIC</th>
+            <th>Phone</th>
+        </tr>
+        {% for i in all_patients %}
+            <tr>
+                <td>{{i.NRIC}}</td>
+                <td>{{i.Name}}</td>
+                <td>{{i.Phone}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

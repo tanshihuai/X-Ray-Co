@@ -11,7 +11,12 @@
 </head>
 <body>
     <header id="main-header">
-        <nav><a href="/Homepage" id="main-logo">X Ray Co</a></nav>
+        <nav>
+            <a href="/Homepage" id="main-logo">X Ray Co</a>
+            <a href="/Homepage">
+                <button type="button" class="logout">Log out</button>
+            </a>
+        </nav>
         <h1>{% block main_heading %}{% endblock %}</h1>
         <p>{% block header_content %}{% endblock %}</p>
       </header>
