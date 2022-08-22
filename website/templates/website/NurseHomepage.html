@@ -1,5 +1,5 @@
 {% extends 'website/base/base.html' %}
-
+    
 {% block title %}
     NurseHomepage
 {% endblock %}
@@ -7,15 +7,18 @@
 {% block body %}
     <table>
         <tr>
+            <th>PID</th>
             <th>Name</th>
             <th>NRIC</th>
             <th>Phone</th>
         </tr>
         {% for i in all_patients %}
             <tr>
-                <td>{{i.NRIC}}</td>
-                <td>{{i.Name}}</td>
-                <td>{{i.Phone}}</td>
+                <td>{{i.id}}</td>
+                <td>{{i.P_NRIC}}</td>
+                <td>{{i.P_Name}}</td>
+                <td>{{i.P_Phone}}</td>
+                <td>{{i.P_Email}}</td>
             </tr>
         {% endfor %}
     </table>
