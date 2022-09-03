@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .models import Patient
+from django.shortcuts import render, redirect
+from .models import Diagnosis, Patient, CaseReport
+from .forms import PatientForm, CaseReportForm
 
 # Create your views here.
 
@@ -12,9 +13,6 @@ def index(request):
 
 def Homepage(request):
     return render(request, 'website/Homepage.html')
-
-def PatientCreateAccountPage(request):
-    return render(request, 'website/PatientCreateAccountPage.html')
 
 def ForgetPassword(request):
     return render(request, 'website/ForgetPassword.html')
@@ -30,15 +28,49 @@ def AdminHomepage(request):
 
 
 def NurseHomepage(request):
+
+    if request.method =="GET":
+        patientform = PatientForm()
+    else:
+        patientform = PatientForm(request.POST)
+        if patientform.is_valid():
+            patient = patientform.save()
+            nric = patientform.cleaned_data['P_NRIC']
+            request.session['nric'] = nric
+            return redirect(f'/NurseCaseReport/')
+
     all_patients = Patient.objects.all()
-    context = {'all_patients': all_patients}
+    context = {'all_patients': all_patients, 'patientform': patientform}
     return render(request, 'website/NurseHomepage.html', context)
 
-def NurseViewPatientProfile(request):
-    return render(request, 'website/NurseViewPatientProfile.html')
+
+def NurseViewPatientProfile(request, P_slug):
+    patient_history = Diagnosis.objects.filter(D_PatientID__P_slug=P_slug)
+    context = {'patient_history': patient_history}
+    return render(request, 'website/NurseViewPatientProfile.html', context)
+
+
+def NurseViewPatientDiagnosis(request, diagnosis_id):
+    diag = Diagnosis.objects.get(id=diagnosis_id)
+    context = {'diag': diag}
+    return render(request, 'website/NurseViewPatientDiagnosis.html', context)
+
 
 def NurseCaseReport(request):
-    return render(request, 'website/NurseCaseReport.html')
+
+    nric = request.session['nric']
+    patient = Patient.objects.get(P_NRIC=nric)
+
+    if request.method == "GET":
+        questionnaire = CaseReportForm()
+        context = {'questionnaire': questionnaire}
+        return render(request, 'website/NurseCaseReport.html', context)
+    else:
+        # u need the slug in action=/nursecasereport/HERE to come to here via post, now check why the other one dont need
+        patient_fk = CaseReport(CR_PatientID=patient)
+        questionnaire = CaseReportForm(request.POST, instance= patient_fk)
+        casereport = questionnaire.save()
+        return redirect(f'/NurseHomepage/')
 
 def DoctorHomepage(request):
     return render(request, 'website/DoctorHomepage.html')
@@ -61,17 +93,3 @@ def XRayStaffXrayPage(request):
 
 
 ########################################################################################################
-
-
-def PatientHomePage(request):
-    return render(request, 'website/PatientHomePage.html')
-
-def PatientViewVisit(request):
-    return render(request, 'website/PatientViewVisit.html')
-
-def PatientViewDiagnosis(request):
-    return render(request, 'website/PatientViewDiagnosis.html')
-
-def PatientAccountPage(request):
-    return render(request, 'website/PatientAccountPage.html')
-    

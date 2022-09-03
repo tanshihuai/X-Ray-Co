@@ -3,3 +3,32 @@
 {% block title %}
     NurseViewPatientProfile
 {% endblock %}
+
+{% block body %}
+    {% if patient_history %}
+        <table class="content-table">
+            <tr>
+                <th>Diagnosis ID</th>
+                <th>Date</th>
+                <th>Doctor</th>
+                <th>Actions</th>
+            </tr>
+            {% for i in patient_history %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.D_DateTime}}</td>
+                    <td>{{i.D_EmployeeID}}</td>
+                    <td><a href="/NurseViewPatientDiagnosis/{{ i.id }}"><button>Details</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Patient has no prior history.</p>
+    {% endif %}
+    
+    <br>
+    <div>
+        <a href="/NurseHomepage/"><button>Back</button></a>
+    </div>
+    
+{% endblock %}

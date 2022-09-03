@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -25,14 +26,24 @@ class Patient(models.Model):
     P_Name = models.CharField(max_length=100)
     P_Phone = models.IntegerField(unique=True)
     P_Email = models.EmailField(unique=True)
+    P_slug = models.SlugField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.P_Name}"
 
+    def save(self, *args, **kwargs):
+        # obj = Article.objects.get(id=1)
+        # set something
+        if self.P_slug is None:
+            self.P_slug = slugify(self.P_NRIC)
+        super().save(*args, **kwargs)
+        # obj.save()
+        # do something
+
 
 class CaseReport(models.Model):
     CR_PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    CR_DateTime = models.DateTimeField()
+    CR_DateTime = models.DateTimeField(auto_now=True)
     CR_Fever = models.BooleanField()
     CR_DryCough = models.BooleanField()
     CR_SoreThroat = models.BooleanField()
@@ -49,28 +60,28 @@ class DoctorQueue(models.Model):
     #inherits Patients's ID from class CaseReport which inherits from class Patient, 
     # not sure if errors will occur, if they occur just inherit from patient directly
     DQ_PatientID = models.OneToOneField(CaseReport, on_delete=models.CASCADE)
-    DQ_DateTime = models.DateTimeField()
+    DQ_DateTime = models.DateTimeField(auto_now=True)
     DQ_SymptomRisk = models.CharField(max_length=30)
 
 
     def __str__(self):
-        return f'Patient ({self.DQ_PatientID.CR_PatientID.P_Name}) attended to by Dr.({self.DQ_EmployeeID.E_Name})'
+        return f'{self.DQ_SymptomRisk}'
 
 
 class XRayQueue(models.Model):
     XR_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
     XR_PatientID = models.OneToOneField(DoctorQueue, on_delete=models.CASCADE)
-    XR_DateTime = models.DateTimeField()
+    XR_DateTime = models.DateTimeField(auto_now=True)
     #TODO: XR_XRayPicture 
     XR_XRayRisk = models.CharField(max_length=30)
 
     def __str__(self):
-        return f"Patient ({self.XR_PatientID.DQ_PatientID.CR_PatientID.P_Name})'s X-ray by Staff ({self.XR_EmployeeID.E_Name})"
+        return f"{self.XR_XRayRisk}"
 
 
 class Diagnosis(models.Model):
     D_PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    D_DateTime = models.DateTimeField()
+    D_DateTime = models.DateTimeField(auto_now=True)
     D_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
     D_Room = models.CharField(max_length=9)
     D_SymptomRisk = models.OneToOneField(DoctorQueue, on_delete=models.CASCADE)

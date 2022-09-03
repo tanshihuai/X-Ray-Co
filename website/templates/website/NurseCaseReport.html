@@ -3,3 +3,15 @@
 {% block title %}
     NurseCaseReport
 {% endblock %}
+
+{% block body %}
+    <form action="/NurseCaseReport/", method="POST">
+        {% csrf_token %}
+        <ul class="horizontal">
+            {{ questionnaire.as_p }}
+        </ul>
+        <div>
+            <button>Submit</button>
+        </div>
+    </form> 
+{% endblock %}

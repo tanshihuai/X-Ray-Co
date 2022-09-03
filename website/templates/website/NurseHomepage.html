@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block body %}
-    <table>
+    <table class="content-table">
         <tr>
-            <th>PID</th>
+            <th>Patient ID</th>
             <th>Name</th>
             <th>NRIC</th>
             <th>Phone</th>
+            <th>Email</th>
+            <th>Action</th>
         </tr>
         {% for i in all_patients %}
             <tr>
@@ -19,7 +21,20 @@
                 <td>{{i.P_Name}}</td>
                 <td>{{i.P_Phone}}</td>
                 <td>{{i.P_Email}}</td>
+                <td><a href="/NurseViewPatientProfile/{{ i.P_slug }}"><button>View</button></a></td>
             </tr>
         {% endfor %}
     </table>
+    <section>
+        <form action="/NurseHomepage/" method="POST">
+            {% csrf_token %}
+            <ul class="horizontal">
+                {{ patientform.as_ul }}
+            </ul>
+            <div>
+                <button>Register</button>
+            </div>
+        </form>
+        
+    </section>
 {% endblock %}
