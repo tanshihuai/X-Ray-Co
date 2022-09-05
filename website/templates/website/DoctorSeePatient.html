@@ -3,3 +3,21 @@
 {% block title %}
     DoctorSeePatient
 {% endblock %}
+
+{% block body %}
+    <p>NRIC: {{ dq_obj.DQ_PatientID.CR_PatientID.P_NRIC }}</p>
+    <p>Name: {{ dq_obj.DQ_PatientID.CR_PatientID.P_Name }}</p>
+    <p>Covid-19 Risk(Symtoms): {{ dq_obj.DQ_SymptomRisk }}</p>
+    <p>Covid-19 Risk(X-Ray): NA, to be added</p>
+
+    <form action="/DoctorSeePatient" method="POST">
+        {% csrf_token %}
+        <!--TODO, TURN THIS into a form to submit and turn it into an entry for the xray database. 
+        Above items (nric, name, covid symtoms and covis risks need not be in the form bc they are not items in the xray)-->
+    </form>
+
+    <br>
+    <div>
+        <a href="javascript:history.go(-1)"><button>Back</button></a>
+    </div>
+{% endblock %}

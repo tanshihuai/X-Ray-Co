@@ -15,7 +15,7 @@ urlpatterns = [
     path('NurseCaseReport/', views.NurseCaseReport),
 
     path('DoctorHomepage/', views.DoctorHomepage),
-    path('DoctorSeePatient/', views.DoctorSeePatient),
+    path('DoctorSeePatient/<p_id>', views.DoctorSeePatient),
     path('DoctorViewPatientQuestionnaire/', views.DoctorViewPatientQuestionnaire),
 
     path('XRayStaffHomepage/', views.XRayStaffHomepage),
@@ -23,5 +23,5 @@ urlpatterns = [
 
     ############################################################################################
 
-    path('delete_dq_entry/<id>', views.delete_dq_entry)
+    path('delete_dq_entry/<p_id>', views.delete_dq_entry)
 ]

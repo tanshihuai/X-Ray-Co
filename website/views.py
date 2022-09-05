@@ -91,8 +91,10 @@ def DoctorHomepage(request):
     context = {'all_patients': all_patients}
     return render(request, 'website/DoctorHomepage.html', context)
 
-def DoctorSeePatient(request):
-    return render(request, 'website/DoctorSeePatient.html')
+def DoctorSeePatient(request, p_id):
+    dq_obj = DoctorQueue.objects.get(DQ_PatientID__CR_PatientID__id= p_id)
+    context = {'dq_obj': dq_obj}
+    return render(request, 'website/DoctorSeePatient.html', context)
 
 def DoctorViewPatientQuestionnaire(request):
     return render(request, 'website/DoctorViewPatientQuestionnaire.html')
@@ -111,7 +113,7 @@ def XRayStaffXrayPage(request):
 ########################################################################################################
 
 
-def delete_dq_entry(request, id):
+def delete_dq_entry(request, p_id):
     dq_obj = DoctorQueue.objects.get(DQ_PatientID__CR_PatientID__id=id)
     print(dq_obj)
     dq_obj.delete()
