@@ -5,7 +5,7 @@ from .models import Patient, Role, Employee, Diagnosis, CaseReport, DoctorQueue,
 
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('E_Name', 'E_Phone', 'E_Email', 'E_RoleName')
+    list_display = ('id', 'E_Name', 'E_Phone', 'E_Email', 'E_RoleName')
 
 class PatientAdmin(admin.ModelAdmin):
     list_display = ('P_Name', 'P_NRIC', 'P_Phone', 'P_Email')

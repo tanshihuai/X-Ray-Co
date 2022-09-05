@@ -20,4 +20,8 @@ urlpatterns = [
 
     path('XRayStaffHomepage/', views.XRayStaffHomepage),
     path('XRayStaffXrayPage/', views.XRayStaffXrayPage),
+
+    ############################################################################################
+
+    path('delete_dq_entry/<id>', views.delete_dq_entry)
 ]

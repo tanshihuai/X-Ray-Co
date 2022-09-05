@@ -57,8 +57,6 @@ class CaseReport(models.Model):
 
 class DoctorQueue(models.Model):
     DQ_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    #inherits Patients's ID from class CaseReport which inherits from class Patient, 
-    # not sure if errors will occur, if they occur just inherit from patient directly
     DQ_PatientID = models.OneToOneField(CaseReport, on_delete=models.CASCADE)
     DQ_DateTime = models.DateTimeField(auto_now=True)
     DQ_SymptomRisk = models.CharField(max_length=30)

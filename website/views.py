@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Diagnosis, Patient, CaseReport
+from .models import Diagnosis, Employee, Patient, CaseReport, DoctorQueue
 from .forms import PatientForm, CaseReportForm
 
 # Create your views here.
@@ -28,15 +28,21 @@ def AdminHomepage(request):
 
 
 def NurseHomepage(request):
-
     if request.method =="GET":
         patientform = PatientForm()
     else:
         patientform = PatientForm(request.POST)
         if patientform.is_valid():
+
+            # for case report auto redirect
+            request.session['nric'] = patientform.cleaned_data['P_NRIC']
+
+            # for patient table
             patient = patientform.save()
-            nric = patientform.cleaned_data['P_NRIC']
-            request.session['nric'] = nric
+
+            
+
+
             return redirect(f'/NurseCaseReport/')
 
     all_patients = Patient.objects.all()
@@ -57,7 +63,6 @@ def NurseViewPatientDiagnosis(request, diagnosis_id):
 
 
 def NurseCaseReport(request):
-
     nric = request.session['nric']
     patient = Patient.objects.get(P_NRIC=nric)
 
@@ -70,10 +75,21 @@ def NurseCaseReport(request):
         patient_fk = CaseReport(CR_PatientID=patient)
         questionnaire = CaseReportForm(request.POST, instance= patient_fk)
         casereport = questionnaire.save()
+
+        # for doctor's queue
+        dq = DoctorQueue()
+        dr_obj = Employee.objects.get(id=5) #hardcoded, change this later
+        dq.DQ_EmployeeID = dr_obj
+        dq.DQ_PatientID = casereport
+        dq.DQ_SymptomRisk = "to be done"
+        dq.save()
+
         return redirect(f'/NurseHomepage/')
 
 def DoctorHomepage(request):
-    return render(request, 'website/DoctorHomepage.html')
+    all_patients = DoctorQueue.objects.all()
+    context = {'all_patients': all_patients}
+    return render(request, 'website/DoctorHomepage.html', context)
 
 def DoctorSeePatient(request):
     return render(request, 'website/DoctorSeePatient.html')
@@ -93,3 +109,10 @@ def XRayStaffXrayPage(request):
 
 
 ########################################################################################################
+
+
+def delete_dq_entry(request, id):
+    dq_obj = DoctorQueue.objects.get(DQ_PatientID__CR_PatientID__id=id)
+    print(dq_obj)
+    dq_obj.delete()
+    return redirect('/DoctorHomepage/')
