@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <p>NRIC: {{ dq_obj.DQ_PatientID.CR_PatientID.P_NRIC }}</p>
-    <p>Name: {{ dq_obj.DQ_PatientID.CR_PatientID.P_Name }}</p>
-    <p>Covid-19 Risk(Symtoms): {{ dq_obj.DQ_SymptomRisk }}</p>
-    <p>Covid-19 Risk(X-Ray): NA, to be added</p>
+    <p>NRIC: {{ d_obj.D_PatientID.CR_PatientID.P_NRIC }}</p>
+    <p>Name: {{ d_obj.D_PatientID.CR_PatientID.P_Name }}</p>
+    <p>Covid-19 Risk(Symptoms): {{ d_obj.D_SymptomRisk }}</p>
+    <p>Covid-19 Risk(X-Ray): {{ d_obj.D_SymptomRisk }}</p>
 
     <form action="/DoctorSeePatient" method="POST">
         {% csrf_token %}

@@ -52,9 +52,9 @@ class CaseReport(models.Model):
     CR_CloseContact = models.BooleanField()
 
     def __str__(self):
-        return f'{self.CR_PatientID.P_Name}({self.CR_DateTime})'
+        return f'{self.CR_PatientID.P_Name}, CR'
 
-
+'''
 class DoctorQueue(models.Model):
     DQ_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
     DQ_PatientID = models.OneToOneField(CaseReport, on_delete=models.CASCADE)
@@ -75,18 +75,17 @@ class XRayQueue(models.Model):
 
     def __str__(self):
         return f"{self.XR_XRayRisk}"
-
+'''
 
 class Diagnosis(models.Model):
-    D_PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    D_PatientID = models.OneToOneField(CaseReport, on_delete=models.CASCADE)
     D_DateTime = models.DateTimeField(auto_now=True)
     D_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    D_Room = models.CharField(max_length=9)
-    D_SymptomRisk = models.OneToOneField(DoctorQueue, on_delete=models.CASCADE)
-    D_XRayRisk = models.OneToOneField(XRayQueue, on_delete=models.CASCADE)
+    D_SymptomRisk = models.CharField(max_length=30)
+    D_XRayRisk = models.CharField(max_length=30)
     #D_XRayPicture
-    D_CovidDiagnosis = models.CharField(max_length=50)
-    D_Medication = models.TextField()
+    D_CovidDiagnosis = models.CharField(max_length=50, blank=True, null=True)
+    D_Medication = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f'{self.D_PatientID.P_Name}, visit on ({self.D_DateTime})'
+        return f'{self.D_PatientID.CR_PatientID.P_Name}, visit on ({self.D_DateTime})'

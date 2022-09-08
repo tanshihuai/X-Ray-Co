@@ -16,14 +16,14 @@
         </tr>
         {% for i in all_patients %}
             <tr>
-                <td>{{i.DQ_PatientID.CR_PatientID.id}}</td>
-                <td>{{i.DQ_PatientID.CR_PatientID.P_NRIC}}</td>
-                <td>{{i.DQ_PatientID.CR_PatientID.P_Name}}</td>
-                <td>{{i.DQ_SymptomRisk}}</td>
-                <td>{{i.DQ_DateTime}}</td>
+                <td>{{i.D_PatientID.CR_PatientID.id}}</td>
+                <td>{{i.D_PatientID.CR_PatientID.P_NRIC}}</td>
+                <td>{{i.D_PatientID.CR_PatientID.P_Name}}</td>
+                <td>{{i.D_SymptomRisk}}</td>
+                <td>{{i.D_DateTime}}</td>
                 <td>
-                    <a href="/DoctorSeePatient/{{ i.DQ_PatientID.CR_PatientID.id }}"><button>See patient</button></a> 
-                    <a href= "/delete_dq_entry/{{ i.DQ_PatientID.CR_PatientID.id }}"><button>Delete patient</button></a>
+                    <a href="/DoctorSeePatient/{{ i.D_PatientID.CR_PatientID.id }}"><button>See patient</button></a> 
+                    <a href= "/delete_dq_entry/{{ i.D_PatientID.CR_PatientID.id }}"><button>Delete patient</button></a>
                 </td>
             </tr>
         {% endfor %}

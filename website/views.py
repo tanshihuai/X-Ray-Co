@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Diagnosis, Employee, Patient, CaseReport, DoctorQueue
+from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
 from .forms import PatientForm, CaseReportForm
 
 # Create your views here.
@@ -41,8 +41,6 @@ def NurseHomepage(request):
             patient = patientform.save()
 
             
-
-
             return redirect(f'/NurseCaseReport/')
 
     all_patients = Patient.objects.all()
@@ -51,7 +49,7 @@ def NurseHomepage(request):
 
 
 def NurseViewPatientProfile(request, P_slug):
-    patient_history = Diagnosis.objects.filter(D_PatientID__P_slug=P_slug)
+    patient_history = Diagnosis.objects.filter(D_PatientID__CR_PatientID__P_slug=P_slug)
     context = {'patient_history': patient_history}
     return render(request, 'website/NurseViewPatientProfile.html', context)
 
@@ -77,23 +75,23 @@ def NurseCaseReport(request):
         casereport = questionnaire.save()
 
         # for doctor's queue
-        dq = DoctorQueue()
-        dr_obj = Employee.objects.get(id=5) #hardcoded, change this later
-        dq.DQ_EmployeeID = dr_obj
-        dq.DQ_PatientID = casereport
-        dq.DQ_SymptomRisk = "to be done"
-        dq.save()
+        d = Diagnosis()
+        d.D_PatientID = casereport
+        d.D_EmployeeID = Employee.objects.get(id=5) #hardcoded, change this later
+        d.D_SymptomRisk = "to be done"
+        d.D_XRayRisk = "to be done"
+        d.save()
 
         return redirect(f'/NurseHomepage/')
 
 def DoctorHomepage(request):
-    all_patients = DoctorQueue.objects.all()
+    all_patients = Diagnosis.objects.all()
     context = {'all_patients': all_patients}
     return render(request, 'website/DoctorHomepage.html', context)
 
 def DoctorSeePatient(request, p_id):
-    dq_obj = DoctorQueue.objects.get(DQ_PatientID__CR_PatientID__id= p_id)
-    context = {'dq_obj': dq_obj}
+    d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id= p_id)
+    context = {'d_obj': d_obj}
     return render(request, 'website/DoctorSeePatient.html', context)
 
 def DoctorViewPatientQuestionnaire(request):
@@ -114,7 +112,7 @@ def XRayStaffXrayPage(request):
 
 
 def delete_dq_entry(request, p_id):
-    dq_obj = DoctorQueue.objects.get(DQ_PatientID__CR_PatientID__id=id)
-    print(dq_obj)
-    dq_obj.delete()
+    d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id=p_id)
+    print(d_obj)
+    d_obj.delete()
     return redirect('/DoctorHomepage/')
