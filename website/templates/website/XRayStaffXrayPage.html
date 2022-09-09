@@ -3,3 +3,17 @@
 {% block title %}
     XRayStaffXrayPage
 {% endblock %}
+
+{% block body %}
+    {% for i in all_diagnosis %}
+        {% if i.D_xr_queue %}
+            <p>NRIC: {{i.D_PatientID.CR_PatientID.P_NRIC}}</p>
+            <p>Name: {{i.D_PatientID.CR_PatientID.P_Name}}</p>
+            <p>Covid-19 Risk (Symptoms): {{i.D_XRayRisk}}</p>
+
+            <a href="/completeXray/{{ i.D_PatientID.CR_PatientID.id }}"><button>Complete X-Ray</button></a>
+            <a href="javascript:history.go(-1)"><button>Back</button></a>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

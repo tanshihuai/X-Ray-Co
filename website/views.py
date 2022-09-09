@@ -4,6 +4,9 @@ from .forms import PatientForm, CaseReportForm
 
 # Create your views here.
 
+def default(request):
+    return render(request, 'website/default.html')
+
 def index(request):
     return render(request, 'website/index.html')
 
@@ -81,18 +84,20 @@ def NurseCaseReport(request):
         d.D_SymptomRisk = "to be done"
         d.D_XRayRisk = "to be done"
         d.save()
-
         return redirect(f'/NurseHomepage/')
+
 
 def DoctorHomepage(request):
     all_patients = Diagnosis.objects.all()
     context = {'all_patients': all_patients}
     return render(request, 'website/DoctorHomepage.html', context)
 
+
 def DoctorSeePatient(request, p_id):
     d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id= p_id)
     context = {'d_obj': d_obj}
     return render(request, 'website/DoctorSeePatient.html', context)
+
 
 def DoctorViewPatientQuestionnaire(request):
     return render(request, 'website/DoctorViewPatientQuestionnaire.html')
@@ -102,17 +107,45 @@ def DoctorViewPatientQuestionnaire(request):
 
 
 def XRayStaffHomepage(request):
-    return render(request, 'website/XRayStaffHomepage.html')
+    all_diagnosis = Diagnosis.objects.all()
+    context = {'all_diagnosis': all_diagnosis}
+    return render(request, 'website/XRayStaffHomepage.html', context)
 
-def XRayStaffXrayPage(request):
-    return render(request, 'website/XRayStaffXrayPage.html')
+
+def XRayStaffXrayPage(request, p_id):
+    all_diagnosis = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
+    context = {'all_diagnosis': all_diagnosis}
+    return render(request, 'website/XRayStaffXrayPage.html', context)
 
 
 ########################################################################################################
 
 
-def delete_dq_entry(request, p_id):
+def remove_from_dr_queue(request, p_id):
     d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id=p_id)
     print(d_obj)
-    d_obj.delete()
+    d_obj.D_dr_queue = False
+    d_obj.D_xr_queue = False
+    d_obj.save()
     return redirect('/DoctorHomepage/')
+
+
+def add_to_xr_queue(request, p_id):
+    d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id=p_id)
+    print(d_obj)
+    d_obj.D_dr_queue = True
+    d_obj.D_xr_queue = True
+    d_obj.save()
+    return redirect('/DoctorHomepage/')
+
+
+def completeXray(request, p_id):
+    d_obj = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
+    for i in d_obj:
+        print(i)
+        print(i.D_xr_queue)
+        if i.D_xr_queue:
+            i.D_xr_queue = False
+            i.save()
+
+    return redirect('/XRayStaffHomepage/')

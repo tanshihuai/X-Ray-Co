@@ -86,6 +86,8 @@ class Diagnosis(models.Model):
     #D_XRayPicture
     D_CovidDiagnosis = models.CharField(max_length=50, blank=True, null=True)
     D_Medication = models.TextField(blank=True, null=True)
+    D_dr_queue = models.BooleanField(default=True)
+    D_xr_queue = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.D_PatientID.CR_PatientID.P_Name}, visit on ({self.D_DateTime})'

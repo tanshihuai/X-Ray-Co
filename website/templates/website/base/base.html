@@ -2,9 +2,11 @@
 
 <style>
 
-.content-table table{
+.content-table{
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .content-table td, .content-table th {
@@ -41,10 +43,10 @@
 <body>
     <header id="main-header">
         <nav>
-            <a href="/Homepage" id="main-logo">X Ray Co</a>
-            <a href="/Homepage">
-                <button type="button" class="logout">Log out</button>
-            </a>
+            <a href="/" id="main-logo">X Ray Co</a>
+            <br>
+            <a href="/"><button type="button" class="logout">Log out</button></a>
+            <br>
             <a href="/index/">To index page(for testing purposes only)</a>
         </nav>
         <h1>{% block main_heading %}{% endblock %}</h1>

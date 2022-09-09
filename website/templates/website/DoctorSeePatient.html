@@ -9,12 +9,19 @@
     <p>Name: {{ d_obj.D_PatientID.CR_PatientID.P_Name }}</p>
     <p>Covid-19 Risk(Symptoms): {{ d_obj.D_SymptomRisk }}</p>
     <p>Covid-19 Risk(X-Ray): {{ d_obj.D_SymptomRisk }}</p>
+    <a href=""><button>View questionnaire</button></a>
+    <a href= "/remove_from_dr_queue/{{ d_obj.D_PatientID.CR_PatientID.id }}"><button>Discharge patient</button></a>
+    <a href= "/add_to_xr_queue/{{ d_obj.D_PatientID.CR_PatientID.id }}"><button>Register patient for X-ray</button></a>
 
-    <form action="/DoctorSeePatient" method="POST">
-        {% csrf_token %}
-        <!--TODO, TURN THIS into a form to submit and turn it into an entry for the xray database. 
-        Above items (nric, name, covid symtoms and covis risks need not be in the form bc they are not items in the xray)-->
+    <br>
+    <br>
+    <form action="/DoctorSeePatient/" method="POST">
+
+        <!-- UPDATE DIAGNOSIS WITH FORM, STEPS IN BOOKMARKS-->
+
+        <button>Update diagnosis</button>
     </form>
+    
 
     <br>
     <div>

@@ -15,6 +15,7 @@
             <th>Actions</th>
         </tr>
         {% for i in all_patients %}
+            {% if i.D_dr_queue %}
             <tr>
                 <td>{{i.D_PatientID.CR_PatientID.id}}</td>
                 <td>{{i.D_PatientID.CR_PatientID.P_NRIC}}</td>
@@ -23,9 +24,10 @@
                 <td>{{i.D_DateTime}}</td>
                 <td>
                     <a href="/DoctorSeePatient/{{ i.D_PatientID.CR_PatientID.id }}"><button>See patient</button></a> 
-                    <a href= "/delete_dq_entry/{{ i.D_PatientID.CR_PatientID.id }}"><button>Delete patient</button></a>
+                    <a href= "/remove_from_dr_queue/{{ i.D_PatientID.CR_PatientID.id }}"><button>Delete patient</button></a>
                 </td>
             </tr>
+            {% endif %}
         {% endfor %}
     </table>
 
