@@ -2,7 +2,7 @@ from django import forms
 from .models import Patient, CaseReport, Diagnosis
 
 
-class PatientFrm(forms.ModelForm):
+class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ('P_NRIC', 'P_Name', 'P_Phone', 'P_Email')

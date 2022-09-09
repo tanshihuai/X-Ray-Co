@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
-from .forms import PatientForm, CaseReportForm
+from .forms import PatientForm, CaseReportForm, DiagnosisForm
 
 # Create your views here.
 
@@ -72,17 +72,16 @@ def NurseCaseReport(request):
         context = {'questionnaire': questionnaire}
         return render(request, 'website/NurseCaseReport.html', context)
     else:
-        # u need the slug in action=/nursecasereport/HERE to come to here via post, now check why the other one dont need
-        patient_fk = CaseReport(CR_PatientID=patient)
-        questionnaire = CaseReportForm(request.POST, instance= patient_fk)
+        patient_fk = CaseReport(CR_PatientID=patient)       # create a case report with the "patientID field filled in"
+        questionnaire = CaseReportForm(request.POST, instance= patient_fk)      # put the case report u created into the form
         casereport = questionnaire.save()
 
         # for doctor's queue
         d = Diagnosis()
         d.D_PatientID = casereport
         d.D_EmployeeID = Employee.objects.get(id=5) #hardcoded, change this later
-        d.D_SymptomRisk = "to be done"
-        d.D_XRayRisk = "to be done"
+        d.D_SymptomRisk = "to be generated"
+        d.D_XRayRisk = "to be generated"
         d.save()
         return redirect(f'/NurseHomepage/')
 
@@ -94,9 +93,33 @@ def DoctorHomepage(request):
 
 
 def DoctorSeePatient(request, p_id):
-    d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id= p_id)
-    context = {'d_obj': d_obj}
-    return render(request, 'website/DoctorSeePatient.html', context)
+
+    d_obj = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id= p_id)
+            
+    if request.method == "GET":
+        diagnosisform = DiagnosisForm()
+        for i in d_obj:
+            if i.D_dr_queue:
+                context = {'currentdiagnosis': i, 'diagnosisform': diagnosisform}
+                return render(request, 'website/DoctorSeePatient.html', context)
+
+    else:
+        diag_part2 = DiagnosisForm(request.POST)
+        if diag_part2.is_valid():
+            for i in d_obj:
+                if i.D_dr_queue:
+                    i.D_CovidDiagnosis = diag_part2.cleaned_data['D_CovidDiagnosis']
+                    i.D_Medication = diag_part2.cleaned_data['D_Medication']
+                    i.D_dr_queue = False
+                    i.D_xr_queue = False
+                    i.save()
+
+                    return redirect('/DoctorHomepage/')
+
+
+
+
+
 
 
 def DoctorViewPatientQuestionnaire(request):

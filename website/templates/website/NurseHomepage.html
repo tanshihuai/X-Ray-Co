@@ -25,11 +25,13 @@
             </tr>
         {% endfor %}
     </table>
+    <br>
     <section>
+        <h2 style>Register patient</h2>
         <form action="/NurseHomepage/" method="POST">
             {% csrf_token %}
             <ul class="horizontal">
-                {{ patientform.as_ul }}
+                {{ patientform.as_p }}
             </ul>
             <div>
                 <button>Register</button>

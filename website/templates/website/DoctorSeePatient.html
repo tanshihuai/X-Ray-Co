@@ -5,21 +5,24 @@
 {% endblock %}
 
 {% block body %}
-    <p>NRIC: {{ d_obj.D_PatientID.CR_PatientID.P_NRIC }}</p>
-    <p>Name: {{ d_obj.D_PatientID.CR_PatientID.P_Name }}</p>
-    <p>Covid-19 Risk(Symptoms): {{ d_obj.D_SymptomRisk }}</p>
-    <p>Covid-19 Risk(X-Ray): {{ d_obj.D_SymptomRisk }}</p>
+    <p>NRIC: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_NRIC }}</p>
+    <p>Name: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_Name }}</p>
+    <p>Covid-19 Risk(Symptoms): {{ currentdiagnosis.D_SymptomRisk }}</p>
+    <p>Covid-19 Risk(X-Ray): {{ currentdiagnosis.D_SymptomRisk }}</p>
     <a href=""><button>View questionnaire</button></a>
-    <a href= "/remove_from_dr_queue/{{ d_obj.D_PatientID.CR_PatientID.id }}"><button>Discharge patient</button></a>
-    <a href= "/add_to_xr_queue/{{ d_obj.D_PatientID.CR_PatientID.id }}"><button>Register patient for X-ray</button></a>
+    <a href= "/remove_from_dr_queue/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>Discharge patient</button></a>
+    <a href= "/add_to_xr_queue/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>Register patient for X-ray</button></a>
 
     <br>
     <br>
-    <form action="/DoctorSeePatient/" method="POST">
 
-        <!-- UPDATE DIAGNOSIS WITH FORM, STEPS IN BOOKMARKS-->
-
-        <button>Update diagnosis</button>
+    <!--TODO: beautify with cripsy forms in bookmarks-->
+    <form action="/DoctorSeePatient/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}" method="POST">
+        {% csrf_token %}
+        <ul class="horizontal">
+            {{ diagnosisform.as_p }}
+        </ul>
+        <button>Diagnose</button>
     </form>
     
 
