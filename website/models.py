@@ -22,10 +22,10 @@ class Employee(models.Model):
 
 
 class Patient(models.Model):
-    P_NRIC = models.CharField(max_length=9, unique=True)
+    P_NRIC = models.CharField(max_length=9)
     P_Name = models.CharField(max_length=100)
-    P_Phone = models.IntegerField(unique=True)
-    P_Email = models.EmailField(unique=True)
+    P_Phone = models.IntegerField()
+    P_Email = models.EmailField()
     P_slug = models.SlugField(blank=True, null=True)
 
     def __str__(self):

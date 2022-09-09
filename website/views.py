@@ -41,9 +41,11 @@ def NurseHomepage(request):
             request.session['nric'] = patientform.cleaned_data['P_NRIC']
 
             # for patient table
-            patient = patientform.save()
-
-            
+            try:
+                registered = Patient.objects.get(P_NRIC= request.session['nric'])
+            except:
+                patient = patientform.save()
+                
             return redirect(f'/NurseCaseReport/')
 
     all_patients = Patient.objects.all()
@@ -145,28 +147,28 @@ def XRayStaffXrayPage(request, p_id):
 
 
 def remove_from_dr_queue(request, p_id):
-    d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id=p_id)
-    print(d_obj)
-    d_obj.D_dr_queue = False
-    d_obj.D_xr_queue = False
-    d_obj.save()
-    return redirect('/DoctorHomepage/')
+    d_obj = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
+    for i in d_obj:
+        if i.D_dr_queue:
+            i.D_dr_queue = False
+            i.D_xr_queue = False
+            i.save()
+            return redirect('/DoctorHomepage/')
 
 
 def add_to_xr_queue(request, p_id):
-    d_obj = Diagnosis.objects.get(D_PatientID__CR_PatientID__id=p_id)
-    print(d_obj)
-    d_obj.D_dr_queue = True
-    d_obj.D_xr_queue = True
-    d_obj.save()
-    return redirect('/DoctorHomepage/')
+    d_obj = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
+    for i in d_obj:
+        if i.D_dr_queue:
+            i.D_dr_queue = True
+            i.D_xr_queue = True
+            i.save()
+            return redirect('/DoctorHomepage/')
 
 
 def completeXray(request, p_id):
     d_obj = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
     for i in d_obj:
-        print(i)
-        print(i.D_xr_queue)
         if i.D_xr_queue:
             i.D_xr_queue = False
             i.save()
