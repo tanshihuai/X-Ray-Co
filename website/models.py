@@ -77,6 +77,12 @@ class XRayQueue(models.Model):
         return f"{self.XR_XRayRisk}"
 '''
 
+COVID_CHOICES = (
+    ('covid positive', 'Positive'),
+    ('covid negative', 'Negative'),
+    ('n/a', 'n/a')
+)
+
 class Diagnosis(models.Model):
     D_PatientID = models.OneToOneField(CaseReport, on_delete=models.CASCADE)
     D_DateTime = models.DateTimeField(auto_now=True)
@@ -84,10 +90,14 @@ class Diagnosis(models.Model):
     D_SymptomRisk = models.CharField(max_length=30)
     D_XRayRisk = models.CharField(max_length=30)
     #D_XRayPicture
-    D_CovidDiagnosis = models.CharField(max_length=50, blank=True, null=True)
+    D_CovidDiagnosis = models.CharField(max_length=50, choices=COVID_CHOICES, default='positive')
     D_Medication = models.TextField(blank=True, null=True)
     D_dr_queue = models.BooleanField(default=True)
     D_xr_queue = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.D_PatientID.CR_PatientID.P_Name}, visit on ({self.D_DateTime})'
+
+
+
+

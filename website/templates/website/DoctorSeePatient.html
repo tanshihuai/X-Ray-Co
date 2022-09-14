@@ -10,7 +10,6 @@
     <p>Covid-19 Risk(Symptoms): {{ currentdiagnosis.D_SymptomRisk }}</p>
     <p>Covid-19 Risk(X-Ray): {{ currentdiagnosis.D_SymptomRisk }}</p>
     <a href=""><button>View questionnaire</button></a>
-    <a href= "/remove_from_dr_queue/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>Discharge patient</button></a>
     <a href= "/add_to_xr_queue/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>Register patient for X-ray</button></a>
 
     <br>

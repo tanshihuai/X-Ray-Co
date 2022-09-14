@@ -160,7 +160,7 @@ def add_to_xr_queue(request, p_id):
     d_obj = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
     for i in d_obj:
         if i.D_dr_queue:
-            i.D_dr_queue = True
+            i.D_dr_queue = False
             i.D_xr_queue = True
             i.save()
             return redirect('/DoctorHomepage/')
@@ -170,6 +170,7 @@ def completeXray(request, p_id):
     d_obj = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
     for i in d_obj:
         if i.D_xr_queue:
+            i.D_dr_queue = True
             i.D_xr_queue = False
             i.save()
 
