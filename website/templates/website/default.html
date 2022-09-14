@@ -1,14 +1,38 @@
 {% extends 'website/base/base.html' %}
+{% load static%}
 
 {% block title %}
     Log in page
 {% endblock %}
 
 {% block body %}
-    <h1>I am a...</h1>
-    <a href="/NurseHomepage/"><button>Nurse</button></a>
-    <a href="/DoctorHomepage/"><button>Doctor</button></a>
-    <a href="/XRayStaffHomepage/"><button>X-Ray Staff</button></a>
-    <a href="/admin/"><button>Admin</button></a>
-
+<div class="roles">
+    <div class="role-container">
+        <h1 class="p-5 bg-primary text-white text-center">I am a...</h1>
+        <div class="role-box">
+            <img src="{% static '../../static/website/images/nurse.png'%}" alt="">
+            <br>
+            <br>
+            <a href="/NurseHomepage/"><button><span>Nurse</span></button></a>
+        </div>
+        <div class="role-box">
+            <img src="{% static '../../static/website/images/doctor.png'%}" alt="">
+            <br>
+            <br>
+            <a href="/DoctorHomepage/"><button><span>Doctor</span></button></a>
+        </div>
+        <div class="role-box">
+            <img src="{% static '../../static/website/images/staff.png'%}" alt="/XRayStaffHomepage/" alt="">
+            <br>
+            <br>
+            <a href="/XRayStaffHomepage/"><button><span>X-Ray Staff</span></button></a>
+        </div>
+        <div class="role-box">
+            <img src="{% static '../../static/website/images/admin.png'%}" alt="">
+            <br>
+            <br>
+            <a href="/admin/"><button><span>Admin</span></button></a>
+        </div>
+    </div>
+</div>
 {% endblock %}

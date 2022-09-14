@@ -4,12 +4,68 @@
   box-sizing: border-box;
 }
 
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  background-color: #ccc3db;
-  color: #3e3e41;
+  background-color:#ecf2f8;
+  color: #0f0f0f;
 }
+
+.role-container{
+  
+  background: #f1f7fd;
+  padding: 0px 0 60px;
+}
+.role-container h1{
+  text-align: center;
+  position: relative;
+}
+.role-box {
+  float: left;
+  width: 25%;
+  padding: 30px 30px 25px 30px;
+  position: relative;
+  text-align: center;
+  background: #fff;
+}
+.role-box button{
+  border-radius: 4px;
+  background-color: rgb(118, 156, 240);
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  font-weight: bold;
+}
+.role-box button span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.role-box button span:after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.role-box button:hover span {
+  padding-right: 25px;
+}
+
+.role-box button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
 
 h1,
 h2,
@@ -47,7 +103,7 @@ button:hover,
 }
 
 #main-logo {
-    font-size: 3rem;
+    font-size: 4rem;
     font-family: 'Roboto Slab', sans-serif;
     text-decoration: none;
     color: #350490;
