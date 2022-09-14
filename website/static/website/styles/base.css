@@ -8,7 +8,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  background-color:#ecf2f8;
+  background-color:#dce6f0;
   color: #0f0f0f;
 }
 
@@ -66,6 +66,14 @@ body {
   right: 0;
 }
 
+.register-patient{
+  border: 2px solid;
+  width: 400px;
+  text-align: center;
+}
+.register-patient ul{
+  text-align: center;
+}
 
 h1,
 h2,
@@ -118,4 +126,5 @@ button:hover,
   top: 0px;
   right: 0px;
 }
+
 
