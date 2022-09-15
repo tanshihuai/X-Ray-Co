@@ -4,11 +4,77 @@
   box-sizing: border-box;
 }
 
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  background-color: #ccc3db;
-  color: #3e3e41;
+  background-color:#e9f0f6;
+  color: #0f0f0f;
+  height: 100%;
+}
+
+.role-container{
+  
+  background: #f1f7fd;
+  padding: 0px 0 60px;
+}
+.role-container h1{
+  text-align: center;
+  position: relative;
+}
+.role-box {
+  float: left;
+  width: 25%;
+  padding: 30px 30px 25px 30px;
+  position: relative;
+  text-align: center;
+  background: #fff;
+}
+.role-box button{
+  border-radius: 4px;
+  background-color: rgb(118, 156, 240);
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  font-weight: bold;
+}
+.role-box button span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.role-box button span:after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.role-box button:hover span {
+  padding-right: 25px;
+}
+
+.role-box button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.register-patient{
+
+  border: 2px solid;
+  width: 1200px;
+  height: auto;
+  text-align: center;
+  margin:auto;
+  margin-top: auto;
 }
 
 h1,
@@ -24,7 +90,7 @@ button,
   font: inherit;
   padding: 0.5rem 1.5rem;
   background-color: #350490;
-  border: 1px solid #350490;
+  border: 1px solid #a278ec;
   color: white;
   border-radius: 4px;
   text-decoration: none;
@@ -36,8 +102,10 @@ button:hover,
   border-color: #230161;
 }
 
+
 #main-header {
     width: 100%;
+    height: 150px;
     text-align: center;
     padding: 2rem 0;
 }
@@ -47,19 +115,235 @@ button:hover,
 }
 
 #main-logo {
-    font-size: 3rem;
+    
+    font-size: 4rem;
     font-family: 'Roboto Slab', sans-serif;
     text-decoration: none;
+    text-shadow: 2px 2px #ff0000;
     color: #350490;
     font-weight: bold;
 }
 
-#logout {
-  position: relative;
+input[type=text][name=search] {
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out;
+  margin-left: 120px;
 }
-#logout img {
+
+input[type=text][name=P_Name]
+{
+      width: 50%;
+      padding: 3px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    
+}
+input[type=text][name=P_NRIC] {
+  width: 50%;
+  padding: 3px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+input[type=number][name=P_Phone] {
+  width: 50%;
+  padding: 3px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+input[type=email][name=P_Email] {
+  width: 50%;
+  padding: 3px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+.tscroll{
+    height: 310px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+
+.sticky-col{
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.header-row{
+  position:static;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(66, 19, 140);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(51, 32, 120);
+}
+
+.tscroll table td :first-child{
+  position: sticky;
+}
+
+.content-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  position:relative;
+  width: 1200px;
+  height: auto;
+  top: auto;
+  left: 50%;
+  margin-top: auto;
+  /* Negative half of height. */
+  margin-left: -600px;
+  /* Negative half of width. */
+  overflow-y: scroll;
+  
+}
+
+/* .content-table .sticky-col{
+  
+} */
+
+.tbody {
+  height: 50px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+}
+
+.content-table td,
+.content-table th {
+  padding: 8px;
+}
+
+
+.content-table td {
+  border: 1px solid;
+  
+}
+
+.content-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.content-table tr:hover {
+  background-color: rgb(147, 190, 242);
+}
+
+.content-table th {
+  font-size: large;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  position: sticky;
+  text-align: left;
+  background-color: rgb(68, 15, 137);
+  color: white;
+}
+
+.horizontal{
+  display: inline;
+
+}
+
+.fixTableHead {
+  overflow-y: auto;
+  height: 130px;
+}
+
+.fixTableHead thead th {
+  position: sticky;
+  top: 0;
+}
+
+.logout {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+/* #logout img {
+  width: 100px;
   position: absolute;
   top: 0px;
   right: 0px;
+} */
+
+.see-patient-table {
+  text-align: left;
+  margin-left: 10%;
 }
 
+.nurse-horizontal p{
+  font-size: large;
+  text-align: center;
+  margin-left: -5px;
+}
+
+.patient-detail{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.patient-detail p{
+margin-left: 600px;
+  text-align: left;
+}
+
+.xray-table {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.xray-table p{
+  margin-left: 600px;
+  text-align: left;
+}
+
+.back-button{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.footer{
+  color: rgb(10, 6, 6);
+  position: relative;
+  bottom: 0;
+  width: auto;
+  height: 30px;
+  margin-top: -10px;
+  text-align: center;
+}

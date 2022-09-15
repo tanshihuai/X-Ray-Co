@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <p>Date: {{ diag.D_DateTime }}</p>
-    <p>Doctor: {{ diag.D_EmployeeID.E_Name }}</p>
-    <p>Covid-19 Risk(Symptoms): {{ diag.D_SymptomRisk }}</p>
-    <p>Covid-19 Risk(X-Ray): {{ diag.D_XRayRisk }}</p>
-    <p>Diagnosis: {{ diag.D_CovidDiagnosis }}</p>
-    <p>Medications: {{ diag.D_Medication }}</p>
+    <div class="patient-detail">
+        <p>Date: {{ diag.D_DateTime }}</p>
+        <p>Doctor: {{ diag.D_EmployeeID.E_Name }}</p>
+        <p>Covid-19 Risk(Symptoms): {{ diag.D_SymptomRisk }}</p>
+        <p>Covid-19 Risk(X-Ray): {{ diag.D_XRayRisk }}</p>
+        <p>Diagnosis: {{ diag.D_CovidDiagnosis }}</p>
+        <p>Medications: {{ diag.D_Medication }}</p>
+    </div>
     
     <br>
-    <div>
+    <div class="back-button">
         <a href="javascript:history.go(-1)"><button>Back</button></a>
     </div>
 {% endblock %}
