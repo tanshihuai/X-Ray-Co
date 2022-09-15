@@ -5,28 +5,29 @@
 {% endblock %}
 
 {% block body %}
-    <p>NRIC: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_NRIC }}</p>
-    <p>Name: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_Name }}</p>
-    <p>Covid-19 Risk(Symptoms): {{ currentdiagnosis.D_SymptomRisk }}</p>
-    <p>Covid-19 Risk(X-Ray): {{ currentdiagnosis.D_SymptomRisk }}</p>
-    <a href=""><button>View questionnaire</button></a>
-    <a href= "/add_to_xr_queue/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>Register patient for X-ray</button></a>
+    <div class="see-patient-table">
+        <p>NRIC: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_NRIC }}</p>
+        <p>Name: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_Name }}</p>
+        <p>Covid-19 Risk(Symptoms): {{ currentdiagnosis.D_SymptomRisk }}</p>
+        <p>Covid-19 Risk(X-Ray): {{ currentdiagnosis.D_SymptomRisk }}</p>
+        <a href=""><button>View questionnaire</button></a>
+        <a href= "/add_to_xr_queue/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>Register patient for X-ray</button></a>
+
+        <br>
+        <br>
+
+        <!--TODO: beautify with cripsy forms in bookmarks-->
+        <form action="/DoctorSeePatient/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}" method="POST">
+            {% csrf_token %}
+            <ul class="horizontal" >
+               {{ diagnosisform.as_p }}
+            </ul>
+            <button>Diagnose</button>
+        </form>
+    </div>   
 
     <br>
-    <br>
-
-    <!--TODO: beautify with cripsy forms in bookmarks-->
-    <form action="/DoctorSeePatient/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}" method="POST">
-        {% csrf_token %}
-        <ul class="horizontal">
-            {{ diagnosisform.as_p }}
-        </ul>
-        <button>Diagnose</button>
-    </form>
-    
-
-    <br>
-    <div>
+    <div class="back-button">
         <a href="javascript:history.go(-1)"><button>Back</button></a>
     </div>
 {% endblock %}

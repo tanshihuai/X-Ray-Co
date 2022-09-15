@@ -6,6 +6,7 @@
 
 {% block body %}
     {% if patient_history %}
+    <div class="table-wrap">
         <table class="content-table">
             <tr>
                 <th>Diagnosis ID</th>
@@ -22,12 +23,13 @@
                 </tr>
             {% endfor %}
         </table>
+    </div>
     {% else %}
         <p>Patient has no prior history.</p>
     {% endif %}
     
     <br>
-    <div>
+    <div class="back-button">
         <a href="/NurseHomepage/"><button>Back</button></a>
     </div>
     

@@ -5,38 +5,46 @@
 {% endblock %}
 
 {% block body %}
-    <table class="content-table">
-        <tr>
-            <th>Patient ID</th>
-            <th>NRIC</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-        {% for i in all_patients %}
-            <tr>
-                <td>{{i.id}}</td>
-                <td>{{i.P_NRIC}}</td>
-                <td>{{i.P_Name}}</td>
-                <td>{{i.P_Phone}}</td>
-                <td>{{i.P_Email}}</td>
-                <td><a href="/NurseViewPatientProfile/{{ i.P_slug }}"><button>View</button></a></td>
+<form>
+<input type="text" name="search" placeholder="Search..">
+</form>
+<body>
+    <div class="tscroll">
+        <table class="content-table">
+            <tr class="data-sticky-header">
+                <th>Patient ID</th>
+                <th>NRIC</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Action</th>
             </tr>
-        {% endfor %}
-    </table>
+        
+            {% for i in all_patients %}
+                <tr class="scroll-col">
+                    <td>{{i.id}}</td>
+                    <td>{{i.P_NRIC}}</td>
+                    <td>{{i.P_Name}}</td>
+                    <td>{{i.P_Phone}}</td>
+                    <td>{{i.P_Email}}</td>
+                    <td><a href="/NurseViewPatientProfile/{{ i.P_slug }}"><button>View</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
     <br>
     <section class="register-patient">
         <h2 style>Register patient</h2>
-        <form action="/NurseHomepage/" method="POST">
+        <form class="register-form" action="/NurseHomepage/" method="POST">
             {% csrf_token %}
-            <ul class="horizontal">
+            <ul class="nurse-horizontal">
                 {{ patientform.as_p }}
             </ul>
             <div>
-                <button>Register</button>
+                <button class="button2">Register</button>
             </div>
         </form>
         
     </section>
+</body>
 {% endblock %}
