@@ -313,6 +313,16 @@ input[type=email][name=P_Email] {
   margin-left: -5px;
 }
 
+.patient-detail{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.patient-detail p{
+margin-left: 600px;
+  text-align: left;
+}
+
 .xray-table {
   margin-top: 50px;
   text-align: center;
