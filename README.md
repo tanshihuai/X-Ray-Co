@@ -1,4 +1,6 @@
-# fyp1
+# X Ray Co
+
+An Internal App to medical staff for X-ray classifications
 
 For Mac user
 run
