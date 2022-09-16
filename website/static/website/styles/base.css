@@ -136,7 +136,7 @@ input[type=text][name=search] {
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
   transition: width 0.4s ease-in-out;
-  margin-left: 120px;
+  margin-left: 20%;
 }
 
 input[type=text][name=P_Name]
