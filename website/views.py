@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
 from .forms import PatientForm, CaseReportForm, DiagnosisForm
+from .filters import PatientFilter
 
 # Create your views here.
 
@@ -31,8 +32,17 @@ def AdminHomepage(request):
 
 
 def NurseHomepage(request):
+
+    all_patients = Patient.objects.all()
+
     if request.method =="GET":
         patientform = PatientForm()
+        if 'search' in request.GET:
+            nricfilter =  PatientFilter(request.GET, queryset=all_patients)
+            all_patients = nricfilter.qs
+        elif 'reset' in request.GET:
+            nricfilter =  PatientFilter()
+
     else:
         patientform = PatientForm(request.POST)
         if patientform.is_valid():
@@ -48,8 +58,8 @@ def NurseHomepage(request):
                 
             return redirect(f'/NurseCaseReport/')
 
-    all_patients = Patient.objects.all()
-    context = {'all_patients': all_patients, 'patientform': patientform}
+    
+    context = {'all_patients': all_patients, 'patientform': patientform, 'nricfilter': nricfilter}
     return render(request, 'website/NurseHomepage.html', context)
 
 
@@ -117,11 +127,6 @@ def DoctorSeePatient(request, p_id):
                     i.save()
 
                     return redirect('/DoctorHomepage/')
-
-
-
-
-
 
 
 def DoctorViewPatientQuestionnaire(request):
