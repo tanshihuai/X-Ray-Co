@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <form>
-    <input type="text" name="search" placeholder="Search..">
+    <form method="GET">
+        {{ nricfilter.form }}
+        <button class="" name="search">Search</button>
     </form>
+
+    <form method="GET">
+        <button class="" name="reset">Reset</button>
+    </form>
+    
+
     <div class="tscroll">
         <table class="content-table">
             <tr class="table-first-row">

@@ -6,6 +6,7 @@
 
 {% block body %}
     <div class="patient-detail">
+        <p>Patient name: {{ diag.D_PatientID.CR_PatientID.P_Name }}</p>
         <p>Date: {{ diag.D_DateTime }}</p>
         <p>Doctor: {{ diag.D_EmployeeID.E_Name }}</p>
         <p>Covid-19 Risk(Symptoms): {{ diag.D_SymptomRisk }}</p>

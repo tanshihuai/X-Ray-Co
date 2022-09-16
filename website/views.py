@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
 from .forms import PatientForm, CaseReportForm, DiagnosisForm
-from .filters import PatientFilter
+from .filters import PatientFilter, DiagnosisFilter
 
 # Create your views here.
 
@@ -40,8 +40,9 @@ def NurseHomepage(request):
         if 'search' in request.GET:
             nricfilter =  PatientFilter(request.GET, queryset=all_patients)
             all_patients = nricfilter.qs
-        elif 'reset' in request.GET:
+        else:
             nricfilter =  PatientFilter()
+        
 
     else:
         patientform = PatientForm(request.POST)
@@ -99,8 +100,15 @@ def NurseCaseReport(request):
 
 
 def DoctorHomepage(request):
+
     all_patients = Diagnosis.objects.all()
-    context = {'all_patients': all_patients}
+    if 'search' in request.GET:
+        nricfilter = DiagnosisFilter(request.GET, queryset=all_patients)
+        all_patients = nricfilter.qs
+    else:
+        nricfilter =  DiagnosisFilter()
+
+    context = {'all_patients': all_patients, 'nricfilter': nricfilter}
     return render(request, 'website/DoctorHomepage.html', context)
 
 
@@ -137,8 +145,16 @@ def DoctorViewPatientQuestionnaire(request):
 
 
 def XRayStaffHomepage(request):
+
     all_diagnosis = Diagnosis.objects.all()
-    context = {'all_diagnosis': all_diagnosis}
+    
+    if 'search' in request.GET:
+        nricfilter = DiagnosisFilter(request.GET, queryset=all_diagnosis)
+        all_diagnosis = nricfilter.qs
+    else:
+        nricfilter =  DiagnosisFilter()
+
+    context = {'all_diagnosis': all_diagnosis, 'nricfilter': nricfilter}
     return render(request, 'website/XRayStaffHomepage.html', context)
 
 
