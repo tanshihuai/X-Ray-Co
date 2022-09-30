@@ -89,7 +89,7 @@ class Diagnosis(models.Model):
     D_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
     D_SymptomRisk = models.CharField(max_length=30)
     D_XRayRisk = models.CharField(max_length=30)
-    #D_XRayPicture
+    D_XRayPicture = models.ImageField(upload_to='images')
     D_CovidDiagnosis = models.CharField(max_length=50, choices=COVID_CHOICES, default='positive')
     D_Medication = models.TextField(blank=True, null=True)
     D_dr_queue = models.BooleanField(default=True)

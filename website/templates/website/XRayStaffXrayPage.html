@@ -11,8 +11,19 @@
             <p>NRIC: {{i.D_PatientID.CR_PatientID.P_NRIC}}</p>
             <p>Name: {{i.D_PatientID.CR_PatientID.P_Name}}</p>
             <p>Covid-19 Risk (Symptoms): {{i.D_XRayRisk}}</p>
-            <a href=""><button>Upload image</button></a>
-            <br>
+
+            <div>
+                {% if not message_flag %}
+                    <form action="/XRayStaffXrayPage/{{ i.D_PatientID.CR_PatientID.id }}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ pictureform.as_p }}
+                        <button>Submit</button>
+                    </form>
+                {% else %}
+                    <p>Image successfully uploaded!</p>
+                {% endif %}
+            </div>
+
             <br>
             <a href="/completeXray/{{ i.D_PatientID.CR_PatientID.id }}"><button>Complete X-Ray</button></a>
             

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
-from .forms import PatientForm, CaseReportForm, DiagnosisForm
+from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm
 from .filters import PatientFilter, DiagnosisFilter
+
 
 # Create your views here.
 
@@ -159,8 +160,24 @@ def XRayStaffHomepage(request):
 
 
 def XRayStaffXrayPage(request, p_id):
+
     all_diagnosis = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
-    context = {'all_diagnosis': all_diagnosis}
+    message_flag = False
+
+    if request.method == "GET":
+        pictureform = PictureForm()
+    else:
+        pictureform = PictureForm(request.POST, request.FILES)
+        if pictureform.is_valid():
+            for i in all_diagnosis:
+                print(i)
+                i.D_XRayPicture = pictureform.cleaned_data['D_XRayPicture']
+                i.save()
+                message_flag = True
+
+
+
+    context = {'all_diagnosis': all_diagnosis, 'pictureform': pictureform, 'message_flag': message_flag }
     return render(request, 'website/XRayStaffXrayPage.html', context)
 
 

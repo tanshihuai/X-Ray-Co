@@ -38,3 +38,10 @@ class DiagnosisForm(forms.ModelForm):
         }
 
 
+class PictureForm(forms.ModelForm):
+    class Meta:
+        model = Diagnosis
+        fields = ('D_XRayPicture',)
+        labels = {
+            "D_XRayPicture": "X-Ray picture",
+        }

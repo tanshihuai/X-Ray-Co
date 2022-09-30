@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.default),
@@ -28,4 +30,4 @@ urlpatterns = [
     path('remove_from_dr_queue/<p_id>', views.remove_from_dr_queue),
     path('add_to_xr_queue/<p_id>', views.add_to_xr_queue),
     path('completeXray/<p_id>', views.completeXray)
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
