@@ -195,7 +195,7 @@ def XRayStaffHomepage(request):
     else:
         nricfilter =  DiagnosisFilter()
 
-    context = {'all_diagnosis': all_diagnosis, 'nricfilter': nricfilter, 'is_xray': request.session['is_xray']}
+    context = {'all_diagnosis': all_diagnosis, 'nricfilter': nricfilter, 'is_xraystaff': request.session['is_xraystaff']}
     return render(request, 'website/XRayStaffHomepage.html', context)
 
 
@@ -217,7 +217,7 @@ def XRayStaffXrayPage(request, p_id):
 
 
 
-    context = {'all_diagnosis': all_diagnosis, 'pictureform': pictureform, 'message_flag': message_flag, 'is_xray': request.session['is_xray']}
+    context = {'all_diagnosis': all_diagnosis, 'pictureform': pictureform, 'message_flag': message_flag, 'is_xraystaff': request.session['is_xraystaff']}
     return render(request, 'website/XRayStaffXrayPage.html', context)
 
 
