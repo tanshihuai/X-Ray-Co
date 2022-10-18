@@ -1,16 +1,50 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login as library_login, authenticate
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
-from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm
+from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm, UserForm
 from .filters import PatientFilter, DiagnosisFilter
 
 
 # Create your views here.
+
 
 def default(request):
     return render(request, 'website/default.html')
 
 def index(request):
     return render(request, 'website/index.html')
+
+def login(request):
+
+    if request.method =="POST":
+        loginform = UserForm(request.POST)
+        username = loginform['username'].value()
+        password = loginform['password'].value()
+        user = authenticate(username=username,password=password)
+        library_login(request, user)
+        print(f"User {user} successfully logged in.")
+        is_doctor = request.session['is_doctor'] = request.user.groups.filter(name="Doctor").exists()
+        is_nurse = request.session['is_nurse'] = request.user.groups.filter(name="Nurse").exists()
+        is_xraystaff = request.session['is_xraystaff'] = request.user.groups.filter(name="XRayStaff").exists()
+
+
+        print(f'Doctor: {is_doctor}, Nurse: {is_nurse}, XRayStaff: {is_xraystaff}')
+
+        if is_doctor:
+            return redirect('/DoctorHomepage/')
+        elif is_nurse:
+            return redirect('/NurseHomepage/')
+        elif is_xraystaff:
+            return redirect('/XRayStaffHomepage/')
+        else:
+            print("An error has occured.")
+
+    else:
+        request.session['is_doctor'] = request.session['is_nurse'] = request.session['is_xraystaff'] = False
+        loginform = UserForm()
+
+    context = {'loginform': loginform}
+    return render(request, 'website/login.html', context)
 
 
 ########################################################################################################
@@ -103,13 +137,14 @@ def NurseCaseReport(request):
 def DoctorHomepage(request):
 
     all_patients = Diagnosis.objects.all()
+    
     if 'search' in request.GET:
         nricfilter = DiagnosisFilter(request.GET, queryset=all_patients)
         all_patients = nricfilter.qs
     else:
         nricfilter =  DiagnosisFilter()
 
-    context = {'all_patients': all_patients, 'nricfilter': nricfilter}
+    context = {'all_patients': all_patients, 'nricfilter': nricfilter, 'is_doctor': request.session['is_doctor']}
     return render(request, 'website/DoctorHomepage.html', context)
 
 
@@ -213,3 +248,7 @@ def completeXray(request, p_id):
             i.save()
 
     return redirect('/XRayStaffHomepage/')
+
+
+
+#TODO: LOGOUT NEEDS TO SET SESSION'S IS_DOCTOR IS_NURSE IS_XRAYSTAFF TO FALSE

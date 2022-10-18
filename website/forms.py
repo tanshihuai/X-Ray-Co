@@ -1,5 +1,6 @@
 from django import forms
 from .models import Patient, CaseReport, Diagnosis
+from django.contrib.auth.models import User
 
 
 class PatientForm(forms.ModelForm):
@@ -45,3 +46,10 @@ class PictureForm(forms.ModelForm):
         labels = {
             "D_XRayPicture": "X-Ray picture",
         }
+
+class UserForm(forms.ModelForm):
+    username = forms.CharField(max_length=30)
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ('username', 'password')
