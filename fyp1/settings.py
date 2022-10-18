@@ -127,3 +127,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'uploads'       # server path to store files in the computer
 MEDIA_URL = '/files/'                   # reference URL for browser to access the files over Http
+LOGOUT_REDIRECT_URL = '/logoutpage'

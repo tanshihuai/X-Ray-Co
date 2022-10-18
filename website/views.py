@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import login as library_login, authenticate
+from django.contrib.auth import login as library_login, logout as library_logout, authenticate
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
 from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm, UserForm
 from .filters import PatientFilter, DiagnosisFilter
@@ -43,11 +43,14 @@ def login(request):
             return redirect('/')
 
     else:
-        request.session['is_doctor'] = request.session['is_nurse'] = request.session['is_xraystaff'] = False
         loginform = UserForm()
 
     context = {'loginform': loginform}
     return render(request, 'website/login.html', context)
+
+
+def logoutpage(request):
+    return render(request, 'website/logoutpage.html')
 
 
 ########################################################################################################
@@ -241,6 +244,9 @@ def completeXray(request, p_id):
 
     return redirect('/XRayStaffHomepage/')
 
+
+def logout(request):
+    library_logout(request)
 
 
 #TODO: LOGOUT NEEDS TO SET SESSION'S IS_DOCTOR IS_NURSE IS_XRAYSTAFF TO FALSE

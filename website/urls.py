@@ -6,6 +6,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.login),
+    path('logoutpage/', views.logoutpage),
 
     path('NurseHomepage/', views.NurseHomepage),
     path('NurseViewPatientProfile/<slug:P_slug>', views.NurseViewPatientProfile),
@@ -23,5 +24,7 @@ urlpatterns = [
 
     path('remove_from_dr_queue/<p_id>', views.remove_from_dr_queue),
     path('add_to_xr_queue/<p_id>', views.add_to_xr_queue),
-    path('completeXray/<p_id>', views.completeXray)
+    path('completeXray/<p_id>', views.completeXray),
+    path('logout', views.logout),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
