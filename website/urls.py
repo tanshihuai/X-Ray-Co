@@ -6,12 +6,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.login),
-    path('index/', views.index),
-
-    path('Homepage/', views.Homepage),
-    path('ForgetPassword/', views.ForgetPassword),
-    path('ChangePassword/', views.ChangePassword),
-    path('AdminHomepage/', views.AdminHomepage),
 
     path('NurseHomepage/', views.NurseHomepage),
     path('NurseViewPatientProfile/<slug:P_slug>', views.NurseViewPatientProfile),

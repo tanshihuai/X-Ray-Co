@@ -12,8 +12,6 @@ from .filters import PatientFilter, DiagnosisFilter
 def default(request):
     return render(request, 'website/default.html')
 
-def index(request):
-    return render(request, 'website/index.html')
 
 def login(request):
 
@@ -36,6 +34,8 @@ def login(request):
                 return redirect('/NurseHomepage/')
             elif is_xraystaff:
                 return redirect('/XRayStaffHomepage/')
+            elif user.is_superuser:
+                return redirect('/admin/')
             else:
                 print("An error has occured - user is neither doctor nor nurse nor xray staff.")
         else:
@@ -48,22 +48,6 @@ def login(request):
 
     context = {'loginform': loginform}
     return render(request, 'website/login.html', context)
-
-
-########################################################################################################
-
-
-def Homepage(request):
-    return render(request, 'website/Homepage.html')
-
-def ForgetPassword(request):
-    return render(request, 'website/ForgetPassword.html')
-
-def ChangePassword(request):
-    return render(request, 'website/ChangePassword.html')
-
-def AdminHomepage(request):
-    return render(request, 'website/AdminHomepage.html')
 
 
 ########################################################################################################
