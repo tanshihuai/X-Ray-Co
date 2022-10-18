@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import login as library_login, authenticate
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
 from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm, UserForm
@@ -21,23 +22,25 @@ def login(request):
         username = loginform['username'].value()
         password = loginform['password'].value()
         user = authenticate(username=username,password=password)
-        library_login(request, user)
-        print(f"User {user} successfully logged in.")
-        is_doctor = request.session['is_doctor'] = request.user.groups.filter(name="Doctor").exists()
-        is_nurse = request.session['is_nurse'] = request.user.groups.filter(name="Nurse").exists()
-        is_xraystaff = request.session['is_xraystaff'] = request.user.groups.filter(name="XRayStaff").exists()
+        if user is not None:
+            library_login(request, user)
+            
+            is_doctor = request.session['is_doctor'] = request.user.groups.filter(name="Doctor").exists()
+            is_nurse = request.session['is_nurse'] = request.user.groups.filter(name="Nurse").exists()
+            is_xraystaff = request.session['is_xraystaff'] = request.user.groups.filter(name="XRayStaff").exists()
+            print(f'Doctor: {is_doctor}, Nurse: {is_nurse}, XRayStaff: {is_xraystaff}')
 
-
-        print(f'Doctor: {is_doctor}, Nurse: {is_nurse}, XRayStaff: {is_xraystaff}')
-
-        if is_doctor:
-            return redirect('/DoctorHomepage/')
-        elif is_nurse:
-            return redirect('/NurseHomepage/')
-        elif is_xraystaff:
-            return redirect('/XRayStaffHomepage/')
+            if is_doctor:
+                return redirect('/DoctorHomepage/')
+            elif is_nurse:
+                return redirect('/NurseHomepage/')
+            elif is_xraystaff:
+                return redirect('/XRayStaffHomepage/')
+            else:
+                print("An error has occured - user is neither doctor nor nurse nor xray staff.")
         else:
-            print("An error has occured - user is neither doctor nor nurse nor xray staff.")
+            messages.error(request,'Login failed. Username or password is incorrect.')
+            return redirect('/')
 
     else:
         request.session['is_doctor'] = request.session['is_nurse'] = request.session['is_xraystaff'] = False
