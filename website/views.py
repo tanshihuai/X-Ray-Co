@@ -37,7 +37,7 @@ def login(request):
         elif is_xraystaff:
             return redirect('/XRayStaffHomepage/')
         else:
-            print("An error has occured.")
+            print("An error has occured - user is neither doctor nor nurse nor xray staff.")
 
     else:
         request.session['is_doctor'] = request.session['is_nurse'] = request.session['is_xraystaff'] = False
@@ -95,19 +95,19 @@ def NurseHomepage(request):
             return redirect(f'/NurseCaseReport/')
 
     
-    context = {'all_patients': all_patients, 'patientform': patientform, 'nricfilter': nricfilter}
+    context = {'all_patients': all_patients, 'patientform': patientform, 'nricfilter': nricfilter, 'is_nurse': request.session['is_nurse']}
     return render(request, 'website/NurseHomepage.html', context)
 
 
 def NurseViewPatientProfile(request, P_slug):
     patient_history = Diagnosis.objects.filter(D_PatientID__CR_PatientID__P_slug=P_slug)
-    context = {'patient_history': patient_history}
+    context = {'patient_history': patient_history, 'is_nurse': request.session['is_nurse']}
     return render(request, 'website/NurseViewPatientProfile.html', context)
 
 
 def NurseViewPatientDiagnosis(request, diagnosis_id):
     diag = Diagnosis.objects.get(id=diagnosis_id)
-    context = {'diag': diag}
+    context = {'diag': diag, 'is_nurse': request.session['is_nurse']}
     return render(request, 'website/NurseViewPatientDiagnosis.html', context)
 
 
@@ -117,7 +117,7 @@ def NurseCaseReport(request):
 
     if request.method == "GET":
         questionnaire = CaseReportForm()
-        context = {'questionnaire': questionnaire}
+        context = {'questionnaire': questionnaire, 'is_nurse': request.session['is_nurse']}
         return render(request, 'website/NurseCaseReport.html', context)
     else:
         patient_fk = CaseReport(CR_PatientID=patient)       # create a case report with the "patientID field filled in"
@@ -132,6 +132,9 @@ def NurseCaseReport(request):
         d.D_XRayRisk = "to be generated"
         d.save()
         return redirect(f'/NurseHomepage/')
+
+
+########################################################################################################
 
 
 def DoctorHomepage(request):
@@ -156,7 +159,7 @@ def DoctorSeePatient(request, p_id):
         diagnosisform = DiagnosisForm()
         for i in d_obj:
             if i.D_dr_queue:
-                context = {'currentdiagnosis': i, 'diagnosisform': diagnosisform}
+                context = {'currentdiagnosis': i, 'diagnosisform': diagnosisform, 'is_doctor': request.session['is_doctor']}
                 return render(request, 'website/DoctorSeePatient.html', context)
 
     else:
@@ -174,7 +177,9 @@ def DoctorSeePatient(request, p_id):
 
 
 def DoctorViewPatientQuestionnaire(request):
-    return render(request, 'website/DoctorViewPatientQuestionnaire.html')
+    #TODO
+    context = {'is_doctor': request.session['is_doctor']}
+    return render(request, 'website/DoctorViewPatientQuestionnaire.html', context)
 
 
 ########################################################################################################
@@ -190,7 +195,7 @@ def XRayStaffHomepage(request):
     else:
         nricfilter =  DiagnosisFilter()
 
-    context = {'all_diagnosis': all_diagnosis, 'nricfilter': nricfilter}
+    context = {'all_diagnosis': all_diagnosis, 'nricfilter': nricfilter, 'is_xray': request.session['is_xray']}
     return render(request, 'website/XRayStaffHomepage.html', context)
 
 
@@ -212,7 +217,7 @@ def XRayStaffXrayPage(request, p_id):
 
 
 
-    context = {'all_diagnosis': all_diagnosis, 'pictureform': pictureform, 'message_flag': message_flag }
+    context = {'all_diagnosis': all_diagnosis, 'pictureform': pictureform, 'message_flag': message_flag, 'is_xray': request.session['is_xray']}
     return render(request, 'website/XRayStaffXrayPage.html', context)
 
 
