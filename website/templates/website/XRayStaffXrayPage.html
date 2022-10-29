@@ -10,7 +10,8 @@
         <div class="xray-table">
             <p>NRIC: {{i.D_PatientID.CR_PatientID.P_NRIC}}</p>
             <p>Name: {{i.D_PatientID.CR_PatientID.P_Name}}</p>
-            <p>Covid-19 Risk (Symptoms): {{i.D_XRayRisk}}</p>
+            <p>Covid-19 Risk (Symptoms): {{i.D_SymptomRisk}}</p>
+            <p>X-Ray prediction: {{i.D_XRayRisk}}</p>
 
             <div>
                 {% if not message_flag %}

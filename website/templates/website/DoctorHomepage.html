@@ -21,8 +21,8 @@
                 <th>Patient ID</th>
                 <th>NRIC</th>
                 <th>Name</th>
-                <th>Symptom Risk</th>
-                <th>X-ray Risk</th>
+                <th>COVID-19 Symptom Risk</th>
+                <th>X-Ray prediction</th>
                 <th>Time</th>
                 <th>Actions</th>
             </tr>
@@ -33,7 +33,7 @@
                     <td>{{i.D_PatientID.CR_PatientID.P_NRIC}}</td>
                     <td>{{i.D_PatientID.CR_PatientID.P_Name}}</td>
                     <td>{{i.D_SymptomRisk}}</td>
-                    <td>{{i.D_XRayRisk}}</td>
+                    <td>{{i.D_AtRiskOf}}</td>
                     <td>{{i.D_DateTime}}</td>
                     <td>
                         <a href="/DoctorSeePatient/{{ i.D_PatientID.CR_PatientID.id }}"><button>See patient</button></a> 

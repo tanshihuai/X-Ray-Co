@@ -44,15 +44,19 @@ class Patient(models.Model):
 class CaseReport(models.Model):
     CR_PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
     CR_DateTime = models.DateTimeField(auto_now=True)
+
+    CR_BreathingDifficulty = models.BooleanField()
     CR_Fever = models.BooleanField()
     CR_DryCough = models.BooleanField()
     CR_SoreThroat = models.BooleanField()
-    CR_BreathingDifficulty = models.BooleanField()
     CR_OverseasTravel = models.BooleanField()
     CR_CloseContact = models.BooleanField()
+    CR_LargeGathering = models.BooleanField()
+    CR_PublicExposedPlaces = models.BooleanField()
+    CR_FamilyWorksPublicExposedPlaces = models.BooleanField()
 
     def __str__(self):
-        return f'{self.CR_PatientID.P_Name}, CR'
+        return f'{self.CR_DateTime}, CR'
 
 '''
 class DoctorQueue(models.Model):
@@ -89,6 +93,7 @@ class Diagnosis(models.Model):
     D_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
     D_SymptomRisk = models.CharField(max_length=30)
     D_XRayRisk = models.CharField(max_length=30)
+    D_AtRiskOf = models.CharField(max_length=100)
     D_XRayPicture = models.ImageField(upload_to='images')
     D_CovidDiagnosis = models.CharField(max_length=50, choices=COVID_CHOICES, default='positive')
     D_Medication = models.TextField(blank=True, null=True)

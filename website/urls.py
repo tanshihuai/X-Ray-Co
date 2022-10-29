@@ -5,7 +5,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', views.login),
+    path('', views.default),
+    path('login/', views.login),
     path('logoutpage/', views.logoutpage),
 
     path('NurseHomepage/', views.NurseHomepage),
@@ -15,7 +16,7 @@ urlpatterns = [
 
     path('DoctorHomepage/', views.DoctorHomepage),
     path('DoctorSeePatient/<p_id>', views.DoctorSeePatient),
-    path('DoctorViewPatientQuestionnaire/', views.DoctorViewPatientQuestionnaire),
+    path('DoctorViewPatientQuestionnaire/<p_id>', views.DoctorViewPatientQuestionnaire),
 
     path('XRayStaffHomepage/', views.XRayStaffHomepage),
     path('XRayStaffXrayPage/<p_id>', views.XRayStaffXrayPage),

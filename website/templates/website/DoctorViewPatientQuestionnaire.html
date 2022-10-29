@@ -3,3 +3,15 @@
 {% block title %}
     DoctorViewPatientQuestionnaire
 {% endblock %}
+
+<!-- context details = i.D_PatientID.CR_BreathingDifficulty, i.D_PatientID.CR_Fever etc-->
+
+{% block body %}
+    <form action="/DoctorViewPatientQuestionnaire/{{ i.D_PatientID.CR_PatientID.id }}" method="POST">
+        {% csrf_token %}
+        <ul class="horizontal">
+            {{ questionnaire.as_p }}
+        </ul>
+        <button>Edit</button>
+    </form>
+{% endblock %}
