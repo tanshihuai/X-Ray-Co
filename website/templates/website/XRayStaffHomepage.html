@@ -32,7 +32,10 @@
                         <td>{{i.D_PatientID.CR_PatientID.P_NRIC}}</td>
                         <td>{{i.D_PatientID.CR_PatientID.P_Name}}</td>
                         <td>{{i.D_XRayRisk}}</td>
-                        <td><a href="/XRayStaffXrayPage/{{ i.D_PatientID.CR_PatientID.id }}"><button>Take X-Ray</button></a></td>
+                        <td>
+                            <a href="/XRayStaffXrayPage/{{ i.D_PatientID.CR_PatientID.id }}"><button>Take X-Ray</button></a>
+                            <a href="/completeXray/{{ i.D_PatientID.CR_PatientID.id }}"><button>Cancel X-Ray</button></a>
+                        </td>
                     </tr>
                 {% endif %}
             {% endfor %}

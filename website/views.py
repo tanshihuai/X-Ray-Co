@@ -4,6 +4,7 @@ from django.contrib.auth import login as library_login, logout as library_logout
 from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
 from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm, UserForm
 from .filters import PatientFilter, DiagnosisFilter
+import os
 
 # ML libraries
 from tensorflow import keras
@@ -177,19 +178,19 @@ def DoctorSeePatient(request, p_id):
                     i.D_xr_queue = False
                     i.save()
 
-                    message = f"Hello {i.D_PatientID.CR_PatientID.P_Name}, your diagnosis results are out. "
+                    message = f"Dear {i.D_PatientID.CR_PatientID.P_Name},\n\nYour diagnosis is complete. "
                     if i.D_CovidDiagnosis == "covid positive":
                         message += f"You have tested POSITIVE for COVID-19. Your medications are: {i.D_Medication}. "
                     else:
-                        message += f"You have tested NEGATIVE for COVID-19. Do continue following the latest safety " \
-                                   f"management measures set by MOH. "
-                    message += "Have a nice day."
+                        message += f"You have tested NEGATIVE for COVID-19."
+
+                    message += "\n\nPlease continue following the latest safety measures set by MOH. Have a nice day."
 
                     phone_prefix = "+65"
                     phone_number = phone_prefix + str(i.D_PatientID.CR_PatientID.P_Phone)
 
                     account_sid = "ACb9304b77776dfa3a1ad5770c80021aae"
-                    auth_token = "c8038294bf47bb2b0c256747284f3eb0"
+                    auth_token = os.getenv("twilio_api_key")
                     client = Client(account_sid, auth_token)
                     message = client.messages.create(
                         to=phone_number,
