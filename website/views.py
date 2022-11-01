@@ -6,6 +6,9 @@ from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm, User
 from .filters import PatientFilter, DiagnosisFilter
 import os
 
+# Twilio
+from twilio.rest import Client
+
 # ML libraries
 from tensorflow import keras
 from skimage.transform import resize
@@ -13,10 +16,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 model = keras.models.load_model('website/model.h5')
-
-# Twilio
-from twilio.rest import Client
-
 
 
 def default(request):
