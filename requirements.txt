@@ -4,3 +4,4 @@ matplotlib~=3.6.1
 twilio~=7.15.0
 tensorflow~=2.10.0
 scikit-image~=0.19.3
+postmarker~=1.0

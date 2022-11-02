@@ -6,8 +6,9 @@ from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm, User
 from .filters import PatientFilter, DiagnosisFilter
 import os
 
-# Twilio
+# Twilio and Postmark
 from twilio.rest import Client
+from postmarker.core import PostmarkClient
 
 # ML libraries
 from tensorflow import keras
@@ -185,6 +186,19 @@ def DoctorSeePatient(request, p_id):
 
                     message += "\n\nPlease continue following the latest safety measures set by MOH. Have a nice day."
 
+                    # Email
+                    email = i.D_PatientID.CR_PatientID.P_Email
+
+                    postmark_api_key = os.getenv("postmark_api_key")
+                    postmark = PostmarkClient(server_token=postmark_api_key)
+                    postmark.emails.send(
+                        From='shtan092@mymail.sim.edu.sg',
+                        To=email,
+                        Subject='X-Ray Diagnosis',
+                        HtmlBody=f"<p>{message}<p>"
+                    )
+
+                    # SMS
                     phone_prefix = "+65"
                     phone_number = phone_prefix + str(i.D_PatientID.CR_PatientID.P_Phone)
 
@@ -196,7 +210,6 @@ def DoctorSeePatient(request, p_id):
                         from_="X Ray Co",
                         body=message)
                     print(message.body)
-
 
                     return redirect('/DoctorHomepage/')
 
