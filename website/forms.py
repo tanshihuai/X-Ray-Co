@@ -18,12 +18,12 @@ class PatientForm(forms.ModelForm):
 class CaseReportForm(forms.ModelForm):
     class Meta:
         model = CaseReport
-        fields = ('CR_BreathingDifficulty', 'CR_Fever', 'CR_DryCough',
+        fields = ('CR_FeverTemp', 'CR_BreathingDifficulty', 'CR_DryCough',
                   'CR_SoreThroat', 'CR_OverseasTravel', 'CR_CloseContact',
                   'CR_LargeGathering', 'CR_PublicExposedPlaces', 'CR_FamilyWorksPublicExposedPlaces')
         labels = {
             "CR_BreathingDifficulty": "Breathing difficulty",
-            "CR_Fever": "Fever",
+            "CR_FeverTemp": "Temperature",
             "CR_DryCough": "Dry cough",
             "CR_SoreThroat": "Sore throat",
             "CR_OverseasTravel": "Overseas travel",

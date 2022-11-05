@@ -122,7 +122,11 @@ def NurseCaseReport(request):
         casereport_with_ID = CaseReport(CR_PatientID=patient)       # create a case report with the "patientID field filled in"
         questionnaire_with_ID = CaseReportForm(request.POST, instance= casereport_with_ID)      # put the case report u created into the form
         casereport = questionnaire_with_ID.save()
-        questionnaire = [casereport.CR_BreathingDifficulty, casereport.CR_Fever, casereport.CR_DryCough,
+        if casereport.CR_FeverTemp != "no fever":
+            fever = True
+        else:
+            fever = False
+        questionnaire = [casereport.CR_BreathingDifficulty, fever, casereport.CR_DryCough,
                          casereport.CR_SoreThroat, casereport.CR_OverseasTravel, casereport.CR_CloseContact,
                          casereport.CR_LargeGathering, casereport.CR_PublicExposedPlaces, casereport.CR_FamilyWorksPublicExposedPlaces
                          ]

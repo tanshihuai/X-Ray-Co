@@ -41,12 +41,19 @@ class Patient(models.Model):
         # do something
 
 
+FEVER_RANGE = (
+    ('<37.6°C', '<37.6°C'),
+    ('37.6°C - 38.3°C', '37.6°C - 38.3°C'),
+    ('38.4°C - 39.0°C', '38.4°C - 39.0°C'),
+    ('39.1°C - 39.9°C', '39.1°C - 39.9°C'),
+    ('>40.0°C', '>40.0°C')
+)
+
 class CaseReport(models.Model):
     CR_PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
     CR_DateTime = models.DateTimeField(auto_now=True)
-
     CR_BreathingDifficulty = models.BooleanField()
-    CR_Fever = models.BooleanField()
+    CR_FeverTemp = models.CharField(max_length=50, choices=FEVER_RANGE, default='<37.6°C')
     CR_DryCough = models.BooleanField()
     CR_SoreThroat = models.BooleanField()
     CR_OverseasTravel = models.BooleanField()
@@ -58,28 +65,6 @@ class CaseReport(models.Model):
     def __str__(self):
         return f'{self.CR_DateTime}, CR'
 
-'''
-class DoctorQueue(models.Model):
-    DQ_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    DQ_PatientID = models.OneToOneField(CaseReport, on_delete=models.CASCADE)
-    DQ_DateTime = models.DateTimeField(auto_now=True)
-    DQ_SymptomRisk = models.CharField(max_length=30)
-
-
-    def __str__(self):
-        return f'{self.DQ_SymptomRisk}'
-
-
-class XRayQueue(models.Model):
-    XR_EmployeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    XR_PatientID = models.OneToOneField(DoctorQueue, on_delete=models.CASCADE)
-    XR_DateTime = models.DateTimeField(auto_now=True)
-    #TODO: XR_XRayPicture 
-    XR_XRayRisk = models.CharField(max_length=30)
-
-    def __str__(self):
-        return f"{self.XR_XRayRisk}"
-'''
 
 COVID_CHOICES = (
     ('covid positive', 'Positive'),

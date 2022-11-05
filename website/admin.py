@@ -14,7 +14,7 @@ class PatientAdmin(admin.ModelAdmin):
     list_display = ('P_Name', 'P_NRIC', 'P_Phone', 'P_Email')
 
 class CaseReportAdmin(admin.ModelAdmin):
-    list_display = ('CR_PatientID', 'CR_BreathingDifficulty', 'CR_Fever', 'CR_DryCough',
+    list_display = ('CR_PatientID', 'CR_BreathingDifficulty', 'CR_FeverTemp', 'CR_DryCough',
                     'CR_SoreThroat', 'CR_OverseasTravel', 'CR_CloseContact',
                     'CR_LargeGathering', 'CR_PublicExposedPlaces', 'CR_FamilyWorksPublicExposedPlaces', 'CR_DateTime')
 

@@ -8,6 +8,7 @@
     <div class="see-patient-table">
         <p>NRIC: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_NRIC }}</p>
         <p>Name: {{ currentdiagnosis.D_PatientID.CR_PatientID.P_Name }}</p>
+        <p>Temperature range: {{ currentdiagnosis.D_PatientID.CR_FeverTemp }}</p>
         <p>Covid-19 Risk(Symptoms): {{ currentdiagnosis.D_SymptomRisk }}</p>
         <a href="/DoctorViewPatientQuestionnaire/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>View questionnaire</button></a>
         <a href= "/add_to_xr_queue/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}"><button>Register patient for X-ray</button></a>
