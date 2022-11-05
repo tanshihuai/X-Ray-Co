@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-uebc1fe9%d*howtb3$6_xx!-0nd1h17&y@+t6zwun@h1064(0*'
+
+secret_key = os.getenv("secret_key")
+SECRET_KEY = '50ffa0fb77209e07dc33dd9de2f89ee5f19377aa1a22b118'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["xrayco.herokuapp.com"]
 
 
 # Application definition
@@ -38,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
-    'django_filters',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -141,4 +143,4 @@ AWS_QUERYSTRING_AUTH = False
 MEDIA_ROOT = BASE_DIR / 'uploads'       # server path to store files in the computer
 MEDIA_URL = '/files/'                   # reference URL for browser to access the files over Http
 
-
+django_heroku.settings(locals())

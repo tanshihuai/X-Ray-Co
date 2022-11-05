@@ -18,12 +18,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 
-aws_api_key = os.getenv("aws_api_key")
-s3_client = boto3.client('s3', aws_access_key_id='AKIARMZGHF3PA6DUO75U', aws_secret_access_key=aws_api_key)
-result = s3_client.download_file('covidh5model', 'static/website/model.h5', 'tmp')
 
-
-model = keras.models.load_model('tmp')
 
 
 def default(request):
@@ -279,7 +274,10 @@ def XRayStaffHomepage(request):
 
 
 def XRayStaffXrayPage(request, p_id):
-
+    aws_api_key = os.getenv("aws_api_key")
+    s3_client = boto3.client('s3', aws_access_key_id='AKIARMZGHF3PA6DUO75U', aws_secret_access_key=aws_api_key)
+    result = s3_client.download_file('covidh5model', 'static/website/model.h5', 'tmp')
+    model = keras.models.load_model('tmp')
     all_diagnosis = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
     message_flag = False
 
@@ -291,6 +289,7 @@ def XRayStaffXrayPage(request, p_id):
             for i in all_diagnosis:
                 if i.D_xr_queue:
                     i.D_XRayPicture = pictureform.cleaned_data['D_XRayPicture']
+
                     results = predictxray(i.D_XRayPicture)
                     string_rephrase = ""
                     for x, y in results.items():
