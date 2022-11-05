@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,7 +124,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGOUT_REDIRECT_URL = '/logoutpage'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+aws_api_key = os.getenv("aws_api_key")
+
+AWS_ACCESS_KEY_ID = 'AKIARMZGHF3PA6DUO75U'
+AWS_SECRET_ACCESS_KEY = aws_api_key
+AWS_STORAGE_BUCKET_NAME = 'covidh5model'
+AWS_QUERYSTRING_AUTH = False
+
+
+
 
 MEDIA_ROOT = BASE_DIR / 'uploads'       # server path to store files in the computer
 MEDIA_URL = '/files/'                   # reference URL for browser to access the files over Http
-LOGOUT_REDIRECT_URL = '/logoutpage'
+
+

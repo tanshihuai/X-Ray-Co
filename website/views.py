@@ -5,6 +5,7 @@ from .models import Diagnosis, Employee, Patient, CaseReport, Diagnosis
 from .forms import PatientForm, CaseReportForm, DiagnosisForm, PictureForm, UserForm
 from .filters import PatientFilter, DiagnosisFilter
 import os
+import boto3
 
 # Twilio and Postmark
 from twilio.rest import Client
@@ -16,7 +17,13 @@ from skimage.transform import resize
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
-model = keras.models.load_model('website/model.h5')
+
+aws_api_key = os.getenv("aws_api_key")
+s3_client = boto3.client('s3', aws_access_key_id='AKIARMZGHF3PA6DUO75U', aws_secret_access_key=aws_api_key)
+result = s3_client.download_file('covidh5model', 'static/website/model.h5', 'tmp')
+
+
+model = keras.models.load_model('tmp')
 
 
 def default(request):
