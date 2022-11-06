@@ -5,14 +5,13 @@
 {% endblock %}
 
 {% block body %}
-<form method="GET">
-    {{ nricfilter.form }}
-    <button class="" name="search">Search</button>
-</form>
-
-<form method="GET">
-    <button class="" name="reset">Reset</button>
-</form>
+<div class="searchbar">
+    <form method="GET">
+        {{ nricfilter.form }}
+        <button class="" name="search">Search</button>
+        <button class="" name="reset">Reset</button>
+    </form>
+</div>
 
 <div class="tableFixHead">
     <div class="table-wrap">
