@@ -280,10 +280,33 @@ def XRayStaffHomepage(request):
 
 
 def XRayStaffXrayPage(request, p_id):
-    aws_api_key = os.getenv("aws_api_key")
-    s3_client = boto3.client('s3', aws_access_key_id='AKIARMZGHF3PA6DUO75U', aws_secret_access_key=aws_api_key)
-    result = s3_client.download_file('covidh5model', 'static/website/model.h5', 'tmp')
-    model = keras.models.load_model('tmp')
+
+    def predictxray(image):
+        aws_api_key = os.getenv("aws_api_key")
+        s3_client = boto3.client('s3', aws_access_key_id='AKIARMZGHF3PA6DUO75U', aws_secret_access_key=aws_api_key)
+        result = s3_client.download_file('covidh5model', 'static/website/model.h5', 'tmp')
+        model = keras.models.load_model('tmp')
+        new_image = plt.imread(image)
+        resized_image = resize(new_image, (224, 224, 3))
+        predictions = model.predict(np.array([resized_image]))
+        list_index = [0, 1, 2]
+        x = predictions
+
+        for i in range(3):
+            for j in range(3):
+                if x[0][list_index[i]] > x[0][list_index[j]]:
+                    temp = list_index[i]
+                    list_index[i] = list_index[j]
+                    list_index[j] = temp
+
+        classification = ['COVID-19', 'Normal', 'Pneumonia']
+        results = {}
+        for i in range(3):
+            results[classification[list_index[i]]] = round(predictions[0][list_index[i]] * 100, 2)
+        print(results)
+        return results
+
+
     all_diagnosis = Diagnosis.objects.filter(D_PatientID__CR_PatientID__id=p_id)
     message_flag = False
 
@@ -350,26 +373,6 @@ def logout(request):
     return redirect('/logoutpage/')
 
 
-def predictxray(image):
-    new_image = plt.imread(image)
-    resized_image = resize(new_image, (224, 224, 3))
-    predictions = model.predict(np.array([resized_image]))
-    list_index = [0, 1, 2]
-    x = predictions
-
-    for i in range(3):
-        for j in range(3):
-            if x[0][list_index[i]] > x[0][list_index[j]]:
-                temp = list_index[i]
-                list_index[i] = list_index[j]
-                list_index[j] = temp
-
-    classification = ['COVID-19', 'Normal', 'Pneumonia']
-    results = {}
-    for i in range(3):
-        results[classification[list_index[i]]] = round(predictions[0][list_index[i]] * 100, 2)
-    print(results)
-    return results
 
 
 def predictsymptom(symptoms):
