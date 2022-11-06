@@ -243,7 +243,13 @@ def DoctorViewPatientQuestionnaire(request, p_id):
                     questionnaire_with_ID = CaseReportForm(request.POST, instance=casereport_with_ID)  # put the case report u created into the form
                     i.D_PatientID = questionnaire_with_ID.save()
 
-                    questionnaire = [i.D_PatientID.CR_BreathingDifficulty, i.D_PatientID.CR_Fever, i.D_PatientID.CR_DryCough,
+                    if i.D_PatientID.CR_FeverTemp != "no fever":
+                        fever = True
+                    else:
+                        fever = False
+
+
+                    questionnaire = [i.D_PatientID.CR_BreathingDifficulty, fever, i.D_PatientID.CR_DryCough,
                                      i.D_PatientID.CR_SoreThroat, i.D_PatientID.CR_OverseasTravel, i.D_PatientID.CR_CloseContact,
                                      i.D_PatientID.CR_LargeGathering, i.D_PatientID.CR_PublicExposedPlaces,
                                      i.D_PatientID.CR_FamilyWorksPublicExposedPlaces
