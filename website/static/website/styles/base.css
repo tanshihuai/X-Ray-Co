@@ -346,3 +346,92 @@ margin-left: 600px;
   margin-top: -10px;
   text-align: center;
 }
+.login_form{
+  min-height:300px;
+   max-width:800px;
+   margin:40px auto;
+   padding: 2cm;
+   background:rgb(244, 244, 245);
+   border-radius:2px;
+   box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+   display:flex;
+   flex-direction:column;
+   overflow:hidden;
+   animation: hi 0.5s;
+   box-sizing:border-box;
+   text-align: center;
+}  
+
+.login_form .loginform_button{
+  width: 160px;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  background-color: #090414;
+  border: 1px solid #f2f0f5;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+label[for=id_username]{
+  margin-bottom:10px;
+  font-size:20px;
+  position:relative;
+  line-height:14px;
+  font-weight: bold;
+}
+
+label[for=id_password]{
+  margin-bottom:10px;
+  font-size:20px;
+  position:relative;
+  line-height:14px;
+  font-weight: bold;
+}
+
+input[type=text][name=username]{
+  background:rgba(0, 0, 0, 0.5);
+  color:#e0e8f7;
+  height:40px;
+  line-height:40px;
+  width:60%;
+  border:none;
+  border-radius:4px;
+  font-weight:600;
+}
+
+input[type=password][name=password]{
+  background:rgba(0, 0, 0, 0.5);
+  color:#dbe5fa;
+  height:40px;
+  line-height:80px;
+  width:60%;
+  border:none;
+  border-radius:4px;
+  font-weight:600;
+}
+
+.backgroundimage {
+  background-image: url("../images/login.jpg");
+  background-size: cover;
+ }
+
+.searchbar{
+  text-align: center;
+}
+
+label[for=id_nric]{
+  font-weight: bold;
+}
+
+.nursecasereport{
+    margin-left: 40%;
+    text-align: left;
+    font-size: 24px;
+  }
+
+.logoutpage{
+  text-align: center;
+  font-size:larger
+}

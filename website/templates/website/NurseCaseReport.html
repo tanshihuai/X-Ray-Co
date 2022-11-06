@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="nursecasereport">
     <form action="/NurseCaseReport/", method="POST">
         {% csrf_token %}
         <ul class="horizontal">
@@ -14,4 +15,5 @@
             <button>Submit</button>
         </div>
     </form> 
+</div>
 {% endblock %}
