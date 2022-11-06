@@ -380,3 +380,12 @@ def predictsymptom(symptoms):
     print(f"{y_pred*100}%")
     return f"{y_pred*100}%"
 
+
+def fastregister(request, p_id):
+
+    patient = Patient.objects.get(id=p_id)
+
+    request.session['nric'] = patient.P_NRIC
+    return redirect(f'/NurseCaseReport/')
+
+

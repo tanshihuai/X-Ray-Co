@@ -27,5 +27,6 @@ urlpatterns = [
     path('add_to_xr_queue/<p_id>', views.add_to_xr_queue),
     path('completeXray/<p_id>', views.completeXray),
     path('logout', views.logout),
+    path('fastregister/<p_id>', views.fastregister),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

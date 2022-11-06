@@ -33,7 +33,10 @@
                     <td>{{i.P_Name}}</td>
                     <td>{{i.P_Phone}}</td>
                     <td>{{i.P_Email}}</td>
-                    <td><a href="/NurseViewPatientProfile/{{ i.P_slug }}"><button>View</button></a></td>
+                    <td>
+                        <a href="/NurseViewPatientProfile/{{ i.P_slug }}"><button>View</button></a>
+                        <a href="/fastregister/{{ i.id }}"><button>Register</button></a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
