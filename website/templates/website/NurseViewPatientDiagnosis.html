@@ -14,7 +14,7 @@
         <p>Diagnosis: {{ diag.D_CovidDiagnosis }}</p>
         <p>Medications: {{ diag.D_Medication }}</p>
         {% if diag.D_XRayPicture %}
-            <p>X Ray: <img src="{{ diag.D_XRayPicture.url }}" alt="XrayImg"></p>
+            <p>X Ray: <br><img src="{{ diag.D_XRayPicture.url }}" alt="XrayImg" width="600" height="400"></p>
         {% endif %}
     </div>
     

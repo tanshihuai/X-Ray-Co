@@ -303,6 +303,7 @@ input[type=email][name=P_Email] {
 } */
 
 .see-patient-table {
+  margin-top: 10px;
   text-align: left;
   margin-left: 10%;
 }
@@ -315,7 +316,7 @@ input[type=email][name=P_Email] {
 
 .patient-detail{
     margin-top: 50px;
-    text-align: center;
+    margin-left: 10%;
 }
 
 .patient-detail p{
@@ -435,4 +436,13 @@ label[for=id_nric]{
 .logoutpage{
   text-align: center;
   font-size:larger
+}
+
+.xrayimage{
+  display:inline-block;
+}
+
+.diagnoseform{
+  display: inline-block;
+  width: 400px;
 }

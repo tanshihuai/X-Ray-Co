@@ -19,17 +19,20 @@
         {% if not currentdiagnosis.D_XRayPicture %}
         <p>X-Ray: Not yet taken</p>
         {% else %}
-        <p>X Ray: <img src="{{ currentdiagnosis.D_XRayPicture.url }}" alt="XrayImg"></p>
+        <p class="xrayimage">X Ray: <br><img src="{{ currentdiagnosis.D_XRayPicture.url }}" alt="XrayImg" width="600" height="400"></p>
         {% endif %}
         <p>Covid-19 Risk(X-Ray): {{ currentdiagnosis.D_XRayRisk }}</p>
         
-        <form action="/DoctorSeePatient/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}" method="POST">
-            {% csrf_token %}
-            <ul class="horizontal" >
-               {{ diagnosisform.as_p }}
-            </ul>
-            <button>Diagnose</button>
-        </form>
+        <div class="diagnoseform">
+            <form action="/DoctorSeePatient/{{ currentdiagnosis.D_PatientID.CR_PatientID.id }}" method="POST">
+                {% csrf_token %}
+                <ul class="horizontal" >
+                    <br>
+                {{ diagnosisform.as_p }}
+                </ul>
+                <button>Diagnose</button>
+            </form>
+        </div>
     </div>   
 
     <br>
