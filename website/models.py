@@ -4,17 +4,17 @@ from django.utils.text import slugify
 # Create your models here.
 
 class Role(models.Model):
-    R_RoleName = models.CharField(max_length=20)
+    R_RoleName = models.CharField(max_length=255)
 
     def __str__(self):
         return self.R_RoleName
 
 
 class Employee(models.Model):
-    E_Password = models.CharField(max_length=30)
-    E_Name = models.CharField(max_length=30)
-    E_Phone = models.CharField(max_length=30)
-    E_Email = models.CharField(max_length=30)
+    E_Password = models.CharField(max_length=255)
+    E_Name = models.CharField(max_length=255)
+    E_Phone = models.CharField(max_length=255)
+    E_Email = models.CharField(max_length=255)
     E_RoleName = models.ForeignKey(Role, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -26,7 +26,7 @@ class Patient(models.Model):
     P_Name = models.CharField(max_length=100)
     P_Phone = models.IntegerField()
     P_Email = models.EmailField()
-    P_slug = models.SlugField(max_length=500, blank=True, null=True)
+    P_slug = models.SlugField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.P_Name}"
