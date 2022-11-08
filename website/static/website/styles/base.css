@@ -461,3 +461,14 @@ label[for=id_nric]{
   text-align: center;
   font-size: x-large;
 }
+
+.notauth{
+  text-align: center;
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.notauth a:hover{
+  color:white;
+}
