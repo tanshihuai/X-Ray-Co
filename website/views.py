@@ -323,10 +323,15 @@ def XRayStaffXrayPage(request, p_id):
                     string_rephrase = ""
                     for x, y in results.items():
                         string_rephrase += f"{x}: {y}%, "
+                    debuging = string_rephrase.rstrip(", ")
+                    print(debuging)
                     i.D_XRayRisk = string_rephrase.rstrip(", ")
                     first_pair = next(iter((results.items())))
                     most_at_risk = f"{first_pair[0]}: {first_pair[1]}%"
                     i.D_AtRiskOf = most_at_risk
+                    print(i.D_XRayPicture)
+                    print(i.D_XRayRisk)
+                    print(i.D_AtRiskOf)
                     i.save()
                     message_flag = True
 
