@@ -13,7 +13,6 @@
             <p>Covid-19 Risk (Symptoms): {{i.D_SymptomRisk}}</p>
             <p>X-Ray prediction: {{i.D_XRayRisk}}</p>
 
-            <div>
                 {% if not message_flag %}
                     <form action="/XRayStaffXrayPage/{{ i.D_PatientID.CR_PatientID.id }}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -23,15 +22,13 @@
                 {% else %}
                     <p>Image successfully uploaded!</p>
                 {% endif %}
-            </div>
-
-            <br>
-            <a href="/completeXray/{{ i.D_PatientID.CR_PatientID.id }}"><button>Complete X-Ray</button></a>
-            
+                <a href="/completeXray/{{ i.D_PatientID.CR_PatientID.id }}"><button >Complete X-Ray</button></a>
+          </div>    
+        <div class="back-button">
+            <a href="javascript:history.go(-1)"><button>Back</button></a>
         </div>
-            <div class="back-button">
-                <a href="javascript:history.go(-1)"><button>Back</button></a>
-            </div>
+      
+            
         {% endif %}
     {% endfor %}
 

@@ -305,7 +305,7 @@ input[type=email][name=P_Email] {
 .see-patient-table {
   margin-top: 10px;
   text-align: left;
-  margin-left: 10%;
+  margin-left: 40%;
 }
 
 .nurse-horizontal p{
@@ -330,7 +330,12 @@ margin-left: 600px;
 }
 
 .xray-table p{
-  margin-left: 600px;
+  margin-left: 40%;
+  text-align: left;
+}
+
+.xray-table button{
+
   text-align: left;
 }
 
@@ -445,4 +450,14 @@ label[for=id_nric]{
 .diagnoseform{
   display: inline-block;
   width: 400px;
+}
+
+.viewpatient{
+  font-size: 24px;
+  margin-left: 42%;
+}
+
+.butbut{
+  text-align: center;
+  font-size: x-large;
 }
