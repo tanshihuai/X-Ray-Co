@@ -26,7 +26,7 @@ class Patient(models.Model):
     P_Name = models.CharField(max_length=100)
     P_Phone = models.IntegerField()
     P_Email = models.EmailField()
-    P_slug = models.SlugField(blank=True, null=True)
+    P_slug = models.SlugField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.P_Name}"
@@ -79,7 +79,7 @@ class Diagnosis(models.Model):
     D_SymptomRisk = models.CharField(max_length=100)
     D_XRayRisk = models.CharField(max_length=100)
     D_AtRiskOf = models.CharField(max_length=100)
-    D_XRayPicture = models.ImageField(upload_to='images')
+    D_XRayPicture = models.ImageField(max_length=100, upload_to='images')
     D_CovidDiagnosis = models.CharField(max_length=100, choices=COVID_CHOICES, default='positive')
     D_Medication = models.TextField(blank=True, null=True)
     D_dr_queue = models.BooleanField(default=True)
