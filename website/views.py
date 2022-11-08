@@ -282,10 +282,18 @@ def XRayStaffHomepage(request):
 def XRayStaffXrayPage(request, p_id):
 
     def predictxray(image):
-        aws_api_key = os.getenv("aws_api_key")
-        s3_client = boto3.client('s3', aws_access_key_id='AKIARMZGHF3PA6DUO75U', aws_secret_access_key=aws_api_key)
-        result = s3_client.download_file('covidh5model', 'static/website/model.h5', 'tmp')
-        model = keras.models.load_model('tmp')
+        path = "tmp"
+        isfiledownloaded = os.path.isfile(path)
+        print(f"does tmp exist?: {isfiledownloaded}")
+
+        if isfiledownloaded:
+            model = keras.models.load_model('tmp')
+        else:
+
+            aws_api_key = os.getenv("aws_api_key")
+            s3_client = boto3.client('s3', aws_access_key_id='AKIARMZGHF3PA6DUO75U', aws_secret_access_key=aws_api_key)
+            result = s3_client.download_file('covidh5model', 'static/website/model.h5', 'tmp')
+            model = keras.models.load_model('tmp')
         new_image = plt.imread(image)
         resized_image = resize(new_image, (224, 224, 3))
         predictions = model.predict(np.array([resized_image]))
