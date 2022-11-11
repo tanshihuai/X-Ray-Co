@@ -11,13 +11,13 @@ pic doc1
 
 ## Application code
 ***Full-stack***
-Web Framework: [Django]:(https://www.djangoproject.com/)
+Web Framework: [Django](https://www.djangoproject.com/)
 
 
 ***APIS***
-Image and model hosting: [AWS S3]: (https://aws.amazon.com/s3/)
-Automated Emails: [Postmark]: (https://postmarkapp.com/)
-Automated SMSes: [Twilio]: (https://www.twilio.com/)
+Image and model hosting: [AWS S3](https://aws.amazon.com/s3/)
+Automated Emails: [Postmark](https://postmarkapp.com/)
+Automated SMSes: [Twilio](https://www.twilio.com/)
 
 ***Deployment***
 Cloud Application Platform: [Heroku]: (https://heroku.com/)
