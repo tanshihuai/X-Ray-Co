@@ -87,7 +87,7 @@ Automated SMSes: [Twilio](https://www.twilio.com/)
 Cloud Application Platform: [Heroku](https://heroku.com/)
 <br>
 
-***Datasets***
+***Datasets*** 
 <br>
 [COVID-19 Radiography Dataset 1](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database)
 <br>
