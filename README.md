@@ -12,7 +12,7 @@ X-Ray Co is a comprehensive in-house app that integrates a machine trained model
 
 
 ## Summary
-Our model will predict the probability of someone having COVID-19, Pneunomia or is healthy given an X-Ray image. This prediction helps doctors get a better picture and improve on their decision making process on whether a patient has contracted COVID-19 or not.
+Our model will predict the probability of someone being at risk of having COVID-19, Pneunomia or is healthy given an X-Ray image. This prediction helps doctors get a better picture and improve on their decision making process on whether a patient has contracted COVID-19 or not.
 
 <p>
 <p align="center">
