@@ -12,7 +12,7 @@ X-Ray Co is a comprehensive in-house app that integrates a machine trained model
 
 
 ## Summary
-Our model will assign a percentage of COVID-19, Peunomia, or Normal given an X-Ray image. This helps doctors get a better picture and can improve on their decision making process on whether a patient has contracted COVID-19 or not.
+Our model will assign a percentage of COVID-19, Pneunomia, or Normal given an X-Ray image. This helps doctors get a better picture and can improve on their decision making process on whether a patient has contracted COVID-19 or not.
 
 <p>
 <p align="center">
