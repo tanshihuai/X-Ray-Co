@@ -99,6 +99,8 @@ Cloud Application Platform: [Heroku](https://heroku.com/)
 
 
 
+## To use:
+Log in credentials available upon request. Please email xraycofyp@gmail.com.
 
 
 
