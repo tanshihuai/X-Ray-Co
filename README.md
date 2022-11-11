@@ -23,7 +23,7 @@ Our model will assign a percentage of COVID-19, Peunomia, or Normal given an X-R
 
 ***Nurses***
 <br>
-Nurses view the patient's visit history can add patients to the doctor's queue.
+Nurses view a patient's visit history can add patients to the doctor's queue. They can also enroll new patients into the hospital's database.
 <p>
 <p align="center">
 <img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/nurse1.JPG" width="600">
@@ -59,7 +59,7 @@ X-Ray staffs can take X-Rays and upload the images for the AI to generate the re
 The patients will receive a customised SMS and Email notifying them of their diagnosis results and medication prescribed.
 <p>
 <p align="center">
-<img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/patient1.jpg" width="600">
+<img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/patient1.JPG" width="950">
 </p>
 
 <br>
@@ -86,9 +86,13 @@ Automated SMSes: [Twilio](https://www.twilio.com/)
 Cloud Application Platform: [Heroku](https://heroku.com/)
 <br>
 
-***Dataset***
+***Datasets***
 <br>
-[COVID-19 Radiography Dataset](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database)
+[COVID-19 Radiography Dataset 1](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database)
+<br>
+[COVID-19 Radiography Dataset 2](https://www.kaggle.com/datasets/khoongweihao/covid19-xray-dataset-train-test-sets)
+<br>
+[COVID-19 Radiography Dataset 3](https://www.kaggle.com/datasets/fusicfenta/chest-xray-for-covid19-detection)
 <br>
 [COVID-19 Symptoms Dataset]: to be added
 
