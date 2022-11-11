@@ -12,7 +12,7 @@ X-Ray Co is a comprehensive in-house app that integrates a machine trained model
 
 
 ## Summary
-Our model will assign a percentage of COVID-19, Pneunomia, or Normal given an X-Ray image. This helps doctors get a better picture and can improve on their decision making process on whether a patient has contracted COVID-19 or not.
+Our model will predict the probability of someone having COVID-19, Pneunomia or is healthy given an X-Ray image. This prediction helps doctors get a better picture and improve on their decision making process on whether a patient has contracted COVID-19 or not.
 
 <p>
 <p align="center">
@@ -23,7 +23,7 @@ Our model will assign a percentage of COVID-19, Pneunomia, or Normal given an X-
 
 ***Nurses***
 <br>
-Nurses view a patient's visit history can add patients to the doctor's queue. They can also enroll new patients into the hospital's database.
+Nurses are able to view a patient's visit history and add patients to the doctor's queue. They can also enroll new patients into the hospital's database.
 <p>
 <p align="center">
 <img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/nurse1.JPG" width="600">
@@ -32,20 +32,9 @@ Nurses view a patient's visit history can add patients to the doctor's queue. Th
 <br>
 <br>
 
-***Doctors***
-<br>
-Doctors can see how likely a patient has COVID-19 from their symptoms. They can also register a patient for an X-Ray, see how likely they are to be COVID-positive from the X-Ray, diagnose the patient and prescribe them medicine.
-<p>
-<p align="center">
-<img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/doc1.JPG" width="600">
-</p>
-
-<br>
-<br>
-
 ***X-Ray staff***
 <br>
-X-Ray staffs can take X-Rays and upload the images for the AI to generate the results.
+X-Ray staff can take X-Rays and upload the images for the AI to generate the results.
 <p>
 <p align="center">
 <img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/xray1.JPG" width="600">
@@ -54,9 +43,21 @@ X-Ray staffs can take X-Rays and upload the images for the AI to generate the re
 <br>
 <br>
 
+***Doctors***
+<br>
+Doctors are able to see how likely a patient has COVID-19 from their symptoms. They can also register a patient for an X-Ray, see how likely they are to be COVID-positive from the X-Ray, diagnose the patient and prescribe them medicine.
+<p>
+<p align="center">
+<img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/doc1.JPG" width="600">
+</p>
+
+<br>
+<br>
+
+
 ***Patients***
 <br>
-The patients will receive a customised SMS and Email notifying them of their diagnosis results and medication prescribed.
+The patients will receive a customised SMS and Email notifying them of their diagnosis results and prescribed medication.
 <p>
 <p align="center">
 <img src="https://github.com/tanshihuai/X-Ray-Co/blob/master/uploads/images/patient1.JPG" width="950">
@@ -94,7 +95,7 @@ Cloud Application Platform: [Heroku](https://heroku.com/)
 <br>
 [COVID-19 Radiography Dataset 3](https://www.kaggle.com/datasets/fusicfenta/chest-xray-for-covid19-detection)
 <br>
-[COVID-19 Symptoms Dataset]: to be added
+[COVID-19 Symptoms Dataset](https://www.kaggle.com/code/midouazerty/symptoms-covid-19-using-7-machine-learning-98/data)
 
 
 
