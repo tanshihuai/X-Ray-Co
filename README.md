@@ -11,7 +11,7 @@ pic doc1
 
 ## Application code
 ***Full-stack***
-Web Framework: [Django]: (https://www.djangoproject.com/)
+Web Framework: [Django]:(https://www.djangoproject.com/)
 
 
 ***APIS***
